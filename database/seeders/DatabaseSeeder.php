@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         if (app()->isLocal()) {
             User::factory()->create([
                 'name'  => 'Administrateur',
-                'email' => 'admin@unitead.fr',
+                'email' => 'admin@pdf.fr',
             ]);
         }
     }
