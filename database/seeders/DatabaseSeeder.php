@@ -12,9 +12,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name'  => 'Administrateur',
-            'email' => 'admin@unitead.fr',
-        ]);
+        if (app()->isLocal()) {
+            User::factory()->create([
+                'name'  => 'Administrateur',
+                'email' => 'admin@unitead.fr',
+            ]);
+        }
     }
 }
