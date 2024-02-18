@@ -12,11 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        if (app()->isLocal()) {
-            User::factory()->create([
-                'name'  => 'Administrateur',
-                'email' => 'admin@pdf.fr',
-            ]);
-        }
+        $this->call([
+            UserSeeder::class,
+            ContractSeeder::class,
+        ]);
     }
 }
