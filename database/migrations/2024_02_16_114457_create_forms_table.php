@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Form;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,14 +11,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('contracts', static function (Blueprint $table) {
+        Schema::create('forms', static function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug')->unique();
-            $table->longText('content')->nullable();
-            $table->boolean('is_published')->default(false);
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignIdFor(Form::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->json('form_schema')->nullable();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('contracts');
+        Schema::dropIfExists('forms');
     }
 };

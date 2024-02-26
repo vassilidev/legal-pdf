@@ -2,20 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ContractResource\Pages;
-use App\Filament\Resources\ContractResource\RelationManagers;
-use App\Models\Contract;
+use App\Filament\Resources\FormResource\Pages;
+use App\Filament\Resources\FormResource\RelationManagers;
+use App\Models\Form as FormModel;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ContractResource extends Resource
+class FormResource extends Resource
 {
-    protected static ?string $model = Contract::class;
+    protected static ?string $model = FormModel::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -24,25 +25,12 @@ class ContractResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
-                    ->label('Creator')
                     ->relationship('user', 'name')
-                    ->required(),
-                Forms\Components\Select::make('form_id')
-                    ->label('Form')
-                    ->relationship('form', 'name')
                     ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->unique()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->helperText('Url')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\MarkdownEditor::make('content')
-                    ->helperText('markdown + html + dynamic')
-                    ->columnSpanFull(),
-                Forms\Components\Toggle::make('is_published')
-                    ->required(),
             ]);
     }
 
@@ -51,20 +39,10 @@ class ContractResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Creator')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('form.name')
-                    ->label('Form')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('is_published')
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -82,11 +60,14 @@ class ContractResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('Form')
-                    ->url(fn(Contract $contract) => route('startContractForm', $contract)),
-                Tables\Actions\Action::make('Pdf')
-                    ->url(fn(Contract $contract) => route('pdf.contract', $contract), true),
+                Tables\Actions\EditAction::make('Edit Info'),
+                Tables\Actions\Action::make('Edit Form')
+                    ->color(Color::Green)
+                    ->icon('heroicon-o-pencil-square')
+                    ->url(fn(FormModel $form) => route('backoffice.form.edit', $form)),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -100,9 +81,7 @@ class ContractResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListContracts::route('/'),
-            'create' => Pages\CreateContract::route('/create'),
-            'edit'   => Pages\EditContract::route('/{record}/edit'),
+            'index' => Pages\ManageForms::route('/'),
         ];
     }
 

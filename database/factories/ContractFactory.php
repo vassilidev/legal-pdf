@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Contract;
+use App\Models\Form;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,6 +24,7 @@ class ContractFactory extends Factory
             'content'      => '**' . fake()->sentence . '**',
             'is_published' => fake()->boolean(70),
             'user_id'      => User::inRandomOrder()->first()->id,
+            'form_id'      => Form::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -1,0 +1,93 @@
+{
+  "display": "form",
+  "settings": {
+    "pdf": {
+      "id": "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+      "src": "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
+    }
+  },
+  "components": [
+    {
+      "label": "Genre",
+      "widget": "choicesjs",
+      "tableView": true,
+      "data": {
+        "values": [
+          {
+            "label": "Homme",
+            "value": "homme"
+          },
+          {
+            "label": "Femme",
+            "value": "femme"
+          },
+          {
+            "label": "Autre",
+            "value": "other"
+          }
+        ]
+      },
+      "key": "genre",
+      "type": "select",
+      "input": true
+    },
+    {
+      "label": "Prénom",
+      "applyMaskOn": "change",
+      "tableView": true,
+      "key": "prenom",
+      "type": "textfield",
+      "input": true
+    },
+    {
+      "label": "Nom",
+      "applyMaskOn": "change",
+      "tableView": true,
+      "key": "nom",
+      "type": "textfield",
+      "input": true
+    },
+    {
+      "label": "Extra field?",
+      "optionsLabelPosition": "right",
+      "inline": false,
+      "tableView": false,
+      "values": [
+        {
+          "label": "Non",
+          "value": "non",
+          "shortcut": ""
+        },
+        {
+          "label": "Oui",
+          "value": "oui",
+          "shortcut": ""
+        }
+      ],
+      "key": "extraField",
+      "type": "radio",
+      "input": true
+    },
+    {
+      "label": "Test",
+      "applyMaskOn": "change",
+      "tableView": true,
+      "key": "test",
+      "conditional": {
+        "show": true,
+        "when": "extraField",
+        "eq": "oui"
+      },
+      "type": "textfield",
+      "input": true
+    },
+    {
+      "type": "button",
+      "label": "Submit",
+      "key": "submit",
+      "disableOnInvalid": true,
+      "input": true,
+      "tableView": false
+    }
+  ]
+}

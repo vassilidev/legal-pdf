@@ -20,11 +20,17 @@ class Contract extends Model
 
     protected $fillable = [
         'user_id',
+        'form_id',
         'name',
         'slug',
         'content',
         'is_published',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function scopePublished(Builder $query): Builder
     {
@@ -39,6 +45,11 @@ class Contract extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function form(): BelongsTo
+    {
+        return $this->belongsTo(Form::class);
     }
 
     public function render(): string

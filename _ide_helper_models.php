@@ -21,9 +21,11 @@ namespace App\Models{
  * @property string|null $content
  * @property int $is_published
  * @property int $user_id
+ * @property int $form_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Form $form
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\ContractFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Contract newModelQuery()
@@ -35,6 +37,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereContent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereFormId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereIsPublished($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereName($value)
@@ -45,6 +48,37 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contract withoutTrashed()
  */
 	class Contract extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Form
+ *
+ * @property int $id
+ * @property string $name
+ * @property array|null $form_schema
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contract> $contracts
+ * @property-read int|null $contracts_count
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Form newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Form newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Form onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Form query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Form whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Form whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Form whereFormSchema($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Form whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Form whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Form whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Form whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Form withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Form withoutTrashed()
+ */
+	class Form extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -78,6 +112,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
-	class User extends \Eloquent {}
+	class User extends \Eloquent implements \Filament\Models\Contracts\FilamentUser {}
 }
 
