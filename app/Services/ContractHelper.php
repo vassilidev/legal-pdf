@@ -63,14 +63,14 @@ class ContractHelper
         return $this->formatMarkdown($markdown);
     }
 
-    public function formatMarkdown(string $markdown): string
+    public function formatMarkdown(?string $markdown): string
     {
         $replaceFunction = $this->replaceFunctions($markdown);
 
         return Str::markdown($this->replaceEscapeString(Str::markdown($replaceFunction)));
     }
 
-    public function replaceFunctions(string $markdown): string
+    public function replaceFunctions(?string $markdown): string
     {
         $helperFunctionReplaced = Str::replace(array_keys($this->replaceFunctions), array_values($this->replaceFunctions), $markdown);
 
