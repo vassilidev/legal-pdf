@@ -16,13 +16,21 @@
     <script>
         var formBuilder;
 
-        Formio.builder(document.getElementById('builder'), @js($form->form_schema), {
-            language: "fr",
-        }).then(function (form) {
+        let schema = @js($form->form_schema);
+
+        function renderForm(schema) {
+            Formio.createForm(document.getElementById('render'), schema);
+        }
+
+        renderForm(schema)
+
+        Formio.builder(document.getElementById('builder'), schema).then(function (form) {
             formBuilder = form;
             form.on('change', function () {
                 @this.
-                set('formSchema', form.schema)
+                set('formSchema', form.schema);
+
+                renderForm(form.schema);
             });
         });
     </script>
