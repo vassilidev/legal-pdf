@@ -19,5 +19,11 @@ class FormSeeder extends Seeder
             'form_schema' => json_decode(file_get_contents(database_path('seeders/forms/test.json')), true),
             'user_id'     => User::first()->id,
         ]);
+
+        Form::create([
+            'name'        => 'Exemple',
+            'form_schema' => json_decode(file_get_contents(database_path('seeders/forms/example.json')), true),
+            'user_id'     => User::first()->id,
+        ]);
     }
 }

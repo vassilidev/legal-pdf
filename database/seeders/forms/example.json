@@ -1,0 +1,220 @@
+{
+  "components": [
+    {
+      "key": "effectiveDate",
+      "type": "datetime",
+      "input": true,
+      "label": "Effective date",
+      "format": "dd/MM/yyyy",
+      "widget": {
+        "mode": "single",
+        "type": "calendar",
+        "format": "dd/MM/yyyy",
+        "locale": "fr",
+        "maxDate": null,
+        "minDate": null,
+        "time_24hr": true,
+        "allowInput": true,
+        "enableTime": false,
+        "noCalendar": false,
+        "hourIncrement": 1,
+        "disableWeekdays": false,
+        "disableWeekends": false,
+        "minuteIncrement": 1,
+        "displayInTimezone": "viewer",
+        "useLocaleSettings": false
+      },
+      "validate": {
+        "required": true
+      },
+      "tableView": false,
+      "datePicker": {
+        "disableWeekdays": false,
+        "disableWeekends": false
+      },
+      "enableTime": false,
+      "timePicker": {
+        "showMeridian": false
+      },
+      "defaultDate": "moment()",
+      "enableMaxDateInput": false,
+      "enableMinDateInput": false
+    },
+    {
+      "key": "companyName",
+      "type": "textfield",
+      "input": true,
+      "label": "Company Name",
+      "validate": {
+        "required": true
+      },
+      "tableView": true,
+      "applyMaskOn": "change"
+    },
+    {
+      "key": "contractorName",
+      "type": "textfield",
+      "input": true,
+      "label": "Contractor Name",
+      "validate": {
+        "required": true
+      },
+      "tableView": true,
+      "applyMaskOn": "change"
+    },
+    {
+      "key": "startDate",
+      "type": "datetime",
+      "input": true,
+      "label": "Start Date",
+      "format": "dd/MM/yyyy",
+      "widget": {
+        "mode": "single",
+        "type": "calendar",
+        "format": "dd/MM/yyyy",
+        "locale": "fr",
+        "maxDate": null,
+        "minDate": null,
+        "time_24hr": true,
+        "allowInput": true,
+        "enableTime": false,
+        "noCalendar": false,
+        "hourIncrement": 1,
+        "disableWeekdays": false,
+        "disableWeekends": false,
+        "minuteIncrement": 1,
+        "displayInTimezone": "viewer",
+        "useLocaleSettings": false
+      },
+      "validate": {
+        "required": true
+      },
+      "tableView": false,
+      "datePicker": {
+        "disableWeekdays": false,
+        "disableWeekends": false
+      },
+      "enableTime": false,
+      "timePicker": {
+        "showMeridian": false
+      },
+      "defaultDate": "moment()",
+      "enableMaxDateInput": false,
+      "enableMinDateInput": false
+    },
+    {
+      "key": "endDate",
+      "type": "datetime",
+      "input": true,
+      "label": "End Date",
+      "format": "dd/MM/yyyy hh:mm a",
+      "widget": {
+        "mode": "single",
+        "type": "calendar",
+        "format": "dd/MM/yyyy hh:mm a",
+        "locale": "fr",
+        "maxDate": null,
+        "minDate": null,
+        "time_24hr": false,
+        "allowInput": true,
+        "enableTime": true,
+        "noCalendar": false,
+        "hourIncrement": 1,
+        "disableWeekdays": false,
+        "disableWeekends": false,
+        "minuteIncrement": 1,
+        "displayInTimezone": "viewer",
+        "useLocaleSettings": false
+      },
+      "validate": {
+        "required": true
+      },
+      "tableView": false,
+      "datePicker": {
+        "disableWeekdays": false,
+        "disableWeekends": false
+      },
+      "enableMaxDateInput": false,
+      "enableMinDateInput": false
+    },
+    {
+      "key": "state",
+      "data": {
+        "values": [
+          {
+            "label": "Ile-de-France",
+            "value": "Ile-de-France"
+          },
+          {
+            "label": "Paris",
+            "value": "Paris"
+          }
+        ]
+      },
+      "type": "select",
+      "input": true,
+      "label": "State",
+      "widget": "choicesjs",
+      "validate": {
+        "required": true
+      },
+      "tableView": true
+    },
+    {
+      "key": "signatureDate",
+      "type": "datetime",
+      "input": true,
+      "label": "Signature Date",
+      "format": "dd/MM/yyyy",
+      "widget": {
+        "mode": "single",
+        "type": "calendar",
+        "format": "dd/MM/yyyy",
+        "locale": "fr",
+        "maxDate": null,
+        "minDate": null,
+        "time_24hr": true,
+        "allowInput": true,
+        "enableTime": false,
+        "noCalendar": false,
+        "hourIncrement": 1,
+        "disableWeekdays": false,
+        "disableWeekends": false,
+        "minuteIncrement": 1,
+        "displayInTimezone": "viewer",
+        "useLocaleSettings": false
+      },
+      "validate": {
+        "required": true
+      },
+      "tableView": false,
+      "datePicker": {
+        "disableWeekdays": false,
+        "disableWeekends": false
+      },
+      "enableTime": false,
+      "timePicker": {
+        "showMeridian": false
+      },
+      "defaultDate": "moment()",
+      "enableMaxDateInput": false,
+      "enableMinDateInput": false
+    },
+    {
+      "key": "signature",
+      "type": "checkbox",
+      "input": true,
+      "label": "Signature",
+      "tableView": false,
+      "defaultValue": false
+    },
+    {
+      "key": "submit",
+      "type": "button",
+      "input": true,
+      "label": "Submit",
+      "tableView": false,
+      "disableOnInvalid": true
+    }
+  ]
+}

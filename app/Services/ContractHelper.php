@@ -9,7 +9,7 @@ class ContractHelper
 {
     public array $replaceFunctions = [
         '#nextArticleNumber#' => '{{ $contractHelper->getNextArticleNumber() }}',
-        '#articleNumber#' => '{{ $contractHelper->getArticleNumber() }}',
+        '#articleNumber#'     => '{{ $contractHelper->getArticleNumber() }}',
     ];
 
     public array $replaceString = [
@@ -18,6 +18,7 @@ class ContractHelper
 
     public function __construct(
         public readonly Contract $contract,
+        private readonly array   $answers = [],
         private int              $articleNumber = 0,
     )
     {
@@ -81,9 +82,7 @@ class ContractHelper
     {
         $pattern = '/#(?:contract|answers)->(\w+)#/';
 
-        return preg_replace_callback($pattern, function($matches) {
-            $answers = [];
-
+        return preg_replace_callback($pattern, function ($matches) {
             $key = $matches[1];
 
             if (Str::startsWith($matches[0], "#contract")) {
@@ -91,8 +90,9 @@ class ContractHelper
             }
 
             if (Str::startsWith($matches[0], "#answers")) {
-                return $answers[$key] ?? $matches[0];
+                return htmlspecialchars($this->answers[$key] ?? '....');
             }
+
             return $matches[0];
         }, $markdown);
     }

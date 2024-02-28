@@ -52,9 +52,9 @@ class Contract extends Model
         return $this->belongsTo(Form::class);
     }
 
-    public function render(): string
+    public function render(array $answers = []): string
     {
-        $helper = new ContractHelper($this);
+        $helper = new ContractHelper($this, $answers);
 
         return Blade::render(
             string: $helper->render(),

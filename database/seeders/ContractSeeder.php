@@ -23,6 +23,15 @@ class ContractSeeder extends Seeder
             'form_id'      => Form::first()->id,
         ]);
 
+        Contract::create([
+            'name'         => 'Exemple',
+            'slug'         => 'exemple',
+            'content'      => file_get_contents(database_path('seeders/contracts/example.md')),
+            'is_published' => true,
+            'user_id'      => User::first()->id,
+            'form_id'      => 2,
+        ]);
+
         if (app()->isLocal()) {
             Contract::factory(10)->create();
         }
