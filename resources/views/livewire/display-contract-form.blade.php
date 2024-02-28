@@ -6,10 +6,16 @@
             </div>
         @endif
 
-        <div id="form" wire:ignore></div>
+        <div class="card mx-5">
+            <div class="card-body bg-light">
+                <div id="form" wire:ignore></div>
+            </div>
+        </div>
     </div>
 
     @if($data)
+        <hr>
+
         <div class="border p-5" id="render">
             {!! $contract->render($data) !!}
         </div>
@@ -63,6 +69,12 @@
         }
 
         #render {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
             background: url(https://i.ibb.co/09Jvc9s/Mask-group.png);
             background-repeat: round;
         }
