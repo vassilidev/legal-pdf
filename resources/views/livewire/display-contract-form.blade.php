@@ -10,7 +10,7 @@
     </div>
 
     @if($data)
-        <div class="border p-5">
+        <div class="border p-5" id="render">
             {!! $contract->render($data) !!}
         </div>
     @endif
@@ -60,6 +60,11 @@
     <style>
         .formio-form ul.pagination {
             display: none;
+        }
+
+        #render {
+            background: url(https://i.ibb.co/09Jvc9s/Mask-group.png);
+            background-repeat: round;
         }
     </style>
 @endpush
