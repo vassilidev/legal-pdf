@@ -10,5 +10,11 @@
                 <livewire:update-form :form="$form"/>
             </div>
         </div>
+        <div class="card">
+            <div class="card-header">
+                Form Render
+            </div>
+            <div class="card-body" id="render"></div>
+        </div>
     </section>
 @endsection
