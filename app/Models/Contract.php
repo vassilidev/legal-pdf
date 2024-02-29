@@ -20,11 +20,19 @@ class Contract extends Model
 
     protected $fillable = [
         'user_id',
-        'form_id',
         'name',
+        'price',
+        'signature_price',
         'slug',
         'content',
         'is_published',
+        'form_schema'
+    ];
+
+    protected $casts = [
+        'price'           => 'int',
+        'signature_price' => 'int',
+        'form_schema'     => 'array',
     ];
 
     public function getRouteKeyName(): string
@@ -45,11 +53,6 @@ class Contract extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function form(): BelongsTo
-    {
-        return $this->belongsTo(Form::class);
     }
 
     public function render(array $answers = []): string

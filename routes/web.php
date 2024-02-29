@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Backoffice\FormController;
+use App\Http\Controllers\Backoffice\ContractController;
 use App\Http\Controllers\Pdf\ContractSessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,9 +12,13 @@ Route::middleware('auth:web')
     ->prefix('backoffice/')
     ->name('backoffice.')
     ->group(function () {
-        Route::get('form/{form}/edit', [FormController::class, 'edit'])->name('form.edit');
+        Route::get('builder/{contract}', [ContractController::class, 'edit'])->name('contract.edit');
     });
 
 Route::get('pdf/contract/{contract}', [ContractSessionController::class, 'render'])->name('pdf.contract');
 
 Route::redirect('/login', '/admin/login')->name('login');
+
+Route::redirect('/', '/admin/login');
+
+Route::view('test', 'test');

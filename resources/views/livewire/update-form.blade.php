@@ -16,7 +16,7 @@
     <script>
         var formBuilder;
 
-        let schema = @js($form->form_schema);
+        let schema = @js($contract->form_schema);
 
         function renderForm(schema) {
             Formio.createForm(document.getElementById('render'), schema);
@@ -27,8 +27,7 @@
         Formio.builder(document.getElementById('builder'), schema).then(function (form) {
             formBuilder = form;
             form.on('change', function () {
-                @this.
-                set('formSchema', form.schema);
+                @this.set('formSchema', form.schema);
 
                 renderForm(form.schema);
             });

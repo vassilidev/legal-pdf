@@ -64,11 +64,11 @@ class ContractHelper
         return $this->formatMarkdown($markdown);
     }
 
-    public function formatMarkdown(?string $markdown): string
+    public function formatMarkdown(?string $content): string
     {
-        $replaceFunction = $this->replaceFunctions($markdown);
+        $content = $this->replaceEscapeString($content);
 
-        return Str::markdown($this->replaceEscapeString(Str::markdown($replaceFunction)));
+        return $this->replaceFunctions($content);
     }
 
     public function replaceFunctions(?string $markdown): string
