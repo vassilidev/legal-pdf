@@ -33,9 +33,5 @@ class ContractSeeder extends Seeder
             'user_id'      => User::first()->id,
             'price'        => 9999,
         ]);
-
-        if (app()->isLocal()) {
-            Contract::factory(10)->create();
-        }
     }
 }

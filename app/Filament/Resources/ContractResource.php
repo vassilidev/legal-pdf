@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class ContractResource extends Resource
 {
@@ -54,11 +55,21 @@ class ContractResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
+                Tables\Columns\TextColumn::make('price')
+                    ->sortable()
+                    ->money('eur', 100)
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('signature_price')
+                    ->sortable()
+                    ->money('eur', 100)
+                    ->searchable(),
                 Tables\Columns\IconColumn::make('is_published')
+                    ->sortable()
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -77,6 +88,13 @@ class ContractResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ReplicateAction::make()
+                    ->beforeReplicaSaved(function (Contract $replica) {
+                        $name = $replica->name . ' Copy';
+
+                        $replica->name = $name;
+                        $replica->slug = Str::slug($name);
+                    }),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('Builder')
                     ->icon('heroicon-s-wrench-screwdriver')
