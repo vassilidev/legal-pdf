@@ -2,14 +2,13 @@
 
 namespace App\Livewire;
 
-use App\Models\Form;
+use App\Models\Contract;
 use Illuminate\Contracts\View\View;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 class UpdateForm extends Component
 {
-    public Form $form;
+    public Contract $contract;
 
     public ?array $formSchema = null;
 
@@ -32,7 +31,7 @@ class UpdateForm extends Component
      */
     public function mount(): void
     {
-        $this->formType = $this->form->form_schema['display'] ?? 'form';
+        $this->formType = $this->contract->form_schema['display'] ?? 'form';
     }
 
     public function render(): View
@@ -44,7 +43,7 @@ class UpdateForm extends Component
     {
         $this->validateOnly('form_schema');
 
-        $this->form->update([
+        $this->contract->update([
             'form_schema' => $value,
         ]);
     }
@@ -53,11 +52,11 @@ class UpdateForm extends Component
     {
         $this->validateOnly('formType');
 
-        $this->form->update([
+        $this->contract->update([
             'form_schema' => $this->getDefaultForm($value),
         ]);
 
-        return to_route('backoffice.form.edit', $this->form);
+        return to_route('backoffice.contract.edit', $this->contract);
     }
 
     private function getDefaultForm(string $type): array

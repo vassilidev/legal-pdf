@@ -19,13 +19,14 @@ namespace App\Models{
  * @property string $name
  * @property string $slug
  * @property string|null $content
+ * @property array|null $form_schema
  * @property int $is_published
+ * @property int $price
+ * @property int $signature_price
  * @property int $user_id
- * @property int $form_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\Form $form
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\ContractFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Contract newModelQuery()
@@ -37,10 +38,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereContent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contract whereFormId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereFormSchema($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereIsPublished($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSignaturePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereUserId($value)
@@ -48,37 +51,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contract withoutTrashed()
  */
 	class Contract extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\Form
- *
- * @property int $id
- * @property string $name
- * @property array|null $form_schema
- * @property int $user_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contract> $contracts
- * @property-read int|null $contracts_count
- * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|Form newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Form newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Form onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Form query()
- * @method static \Illuminate\Database\Eloquent\Builder|Form whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Form whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Form whereFormSchema($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Form whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Form whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Form whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Form whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Form withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Form withoutTrashed()
- */
-	class Form extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -93,15 +65,23 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $stripe_id
+ * @property string|null $pm_type
+ * @property string|null $pm_last_four
+ * @property string|null $trial_ends_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contract> $contracts
  * @property-read int|null $contracts_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Cashier\Subscription> $subscriptions
+ * @property-read int|null $subscriptions_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|User hasExpiredGenericTrial()
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User onGenericTrial()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
@@ -109,7 +89,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePmLastFour($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePmType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereStripeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTrialEndsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent implements \Filament\Models\Contracts\FilamentUser {}

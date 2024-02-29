@@ -8,6 +8,8 @@ use App\Models\Contract;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
+use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,7 +19,7 @@ class ContractResource extends Resource
 {
     protected static ?string $model = Contract::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-document-text';
 
     public static function form(Form $form): Form
     {
@@ -27,20 +29,17 @@ class ContractResource extends Resource
                     ->label('Creator')
                     ->relationship('user', 'name')
                     ->required(),
-                Forms\Components\Select::make('form_id')
-                    ->label('Form')
-                    ->relationship('form', 'name')
-                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('price')
+                    ->required(),
+                Forms\Components\TextInput::make('signature_price')
+                    ->nullable(),
                 Forms\Components\TextInput::make('slug')
                     ->helperText('Url')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\MarkdownEditor::make('content')
-                    ->helperText('markdown + html + dynamic')
-                    ->columnSpanFull(),
                 Forms\Components\Toggle::make('is_published')
                     ->required(),
             ]);
@@ -52,10 +51,6 @@ class ContractResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Creator')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('form.name')
-                    ->label('Form')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
@@ -83,10 +78,14 @@ class ContractResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('Form')
-                    ->url(fn(Contract $contract) => route('startContractForm', $contract)),
-                Tables\Actions\Action::make('Pdf')
-                    ->url(fn(Contract $contract) => route('pdf.contract', $contract), true),
+                Tables\Actions\Action::make('Builder')
+                    ->icon('heroicon-s-wrench-screwdriver')
+                    ->color(Color::Blue)
+                    ->url(fn(Contract $contract) => route('backoffice.contract.edit', $contract), true),
+                Tables\Actions\Action::make('Public')
+                    ->icon('heroicon-o-eye')
+                    ->color(Color::Gray)
+                    ->url(fn(Contract $contract) => route('startContractForm', $contract), true),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

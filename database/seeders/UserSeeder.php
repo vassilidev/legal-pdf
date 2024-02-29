@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
             'name'     => 'Administrateur',
             'email'    => 'admin@pdf.fr',
             'password' => bcrypt('password'),
-        ]);
+        ])->assignRole('Super Admin');
 
         if (app()->isLocal()) {
             User::factory(10)->create();

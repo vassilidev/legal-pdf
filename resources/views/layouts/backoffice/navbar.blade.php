@@ -7,8 +7,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-{{--                <a class="nav-link" href="{{ URL::previous() }}">Back</a>--}}
-                <a class="nav-link" href="{{ route('filament.admin.pages.dashboard') }}">Filament</a>
+                @role('Super Admin')
+                    <a class="nav-link" href="{{ App\Filament\Resources\ContractResource::getUrl(); }}">Contracts</a>
+                @endrole
             </div>
         </div>
     </div>

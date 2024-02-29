@@ -1,22 +1,21 @@
 <div>
     <div>
-        @if(optional($contract->form->form_schema)['display'] === 'wizard')
+        @if(optional($contract->form_schema)['display'] === 'wizard')
             <div class="progress">
                 <div class="progress-bar progress-bar-striped" id="progressBar" role="progressbar"></div>
             </div>
         @endif
 
         <div class="card mx-5">
-            <div class="card-body bg-light">
+            <div class="card-body p-4 shadow bg-light">
+                <h2>{{ $contract->name }}</h2>
                 <div id="form" wire:ignore></div>
             </div>
         </div>
     </div>
 
     @if($data)
-        <hr>
-
-        <div class="border p-5" id="render">
+        <div class="border border-top-0 border-4 shadow p-5" id="render">
             {!! $contract->render($data) !!}
         </div>
     @endif
@@ -24,7 +23,7 @@
 
 @script
     <script>
-        Formio.createForm(document.getElementById('form'), @js($contract->form->form_schema), {
+        Formio.createForm(document.getElementById('form'), @js($contract->form_schema), {
             buttonSettings: {
                 showCancel: false,
             },

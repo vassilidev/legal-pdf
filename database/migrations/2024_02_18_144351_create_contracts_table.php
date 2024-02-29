@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Form;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,11 +16,11 @@ return new class extends Migration {
             $table->string('name');
             $table->string('slug')->unique();
             $table->longText('content')->nullable();
+            $table->json('form_schema')->nullable();
             $table->boolean('is_published')->default(false);
             $table->unsignedBigInteger('price')->default(0);
             $table->unsignedBigInteger('signature_price')->default(0);
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignIdFor(Form::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
