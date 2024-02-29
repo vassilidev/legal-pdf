@@ -90,7 +90,7 @@ class ContractHelper
             }
 
             if (Str::startsWith($matches[0], "#answers")) {
-                return htmlspecialchars($this->answers[$key] ?? '....');
+                return htmlspecialchars(!empty($this->answers[$key]) ? $this->answers[$key] : Str::repeat('_', 15));
             }
 
             return $matches[0];
