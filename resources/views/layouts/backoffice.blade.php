@@ -11,7 +11,7 @@
     @livewireStyles
     @stack('css')
 </head>
-<body oncontextmenu="return false">
+<body @production oncontextmenu="return false" @endproduction>
 <header>
     @include('layouts.backoffice.navbar')
 </header>

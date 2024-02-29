@@ -22,15 +22,14 @@
     @endif
 </div>
 
-@push('js')
+@script
     <script>
         Formio.createForm(document.getElementById('form'), @js($contract->form->form_schema), {
             buttonSettings: {
                 showCancel: false,
             },
         }).then(function (form) {
-            @this.
-            set('data', form.data)
+            @this.set('data', form.data);
 
             let navigation = document.querySelector('.formio-wizard-navigation');
 
@@ -55,12 +54,11 @@
             }
 
             form.on('change', function (form) {
-                @this.
-                set('data', form.data)
+                @this.set('data', form.data)
             });
         })
     </script>
-@endpush
+@endscript
 
 @push('css')
     <style>

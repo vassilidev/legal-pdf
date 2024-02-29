@@ -25,6 +25,7 @@ class ContractFactory extends Factory
             'is_published' => fake()->boolean(70),
             'user_id'      => User::inRandomOrder()->first()->id,
             'form_id'      => Form::inRandomOrder()->first()->id,
+            'price'        => fake()->numberBetween(2000, 99999),
         ];
     }
 }

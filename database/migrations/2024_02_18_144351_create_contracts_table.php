@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->longText('content')->nullable();
             $table->boolean('is_published')->default(false);
+            $table->unsignedBigInteger('price')->default(0);
+            $table->unsignedBigInteger('signature_price')->default(0);
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignIdFor(Form::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();

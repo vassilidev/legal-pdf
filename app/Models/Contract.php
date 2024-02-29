@@ -22,9 +22,16 @@ class Contract extends Model
         'user_id',
         'form_id',
         'name',
+        'price',
+        'signature_price',
         'slug',
         'content',
         'is_published',
+    ];
+
+    protected $casts = [
+        'price'           => 'int',
+        'signature_price' => 'int',
     ];
 
     public function getRouteKeyName(): string
