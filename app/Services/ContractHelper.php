@@ -18,7 +18,7 @@ class ContractHelper
 
     public function __construct(
         public readonly Contract $contract,
-        private readonly array   $answers = [],
+        public readonly array    $answers = [],
         private int              $articleNumber = 0,
     )
     {
@@ -80,7 +80,7 @@ class ContractHelper
 
     public function replaceDynamicValues(string $markdown): string
     {
-        $pattern = '/#(?:contract|answers)->(\w+)#/';
+        $pattern = '/#(?:contract|answers)->(.+)#/';
 
         return preg_replace_callback($pattern, function ($matches) {
             $key = $matches[1];
@@ -90,7 +90,11 @@ class ContractHelper
             }
 
             if (Str::startsWith($matches[0], "#answers")) {
-                return htmlspecialchars(!empty($this->answers[$key]) ? $this->answers[$key] : Str::repeat('_', 15));
+                $answer = (!empty($this->answers[$key]))
+                    ? $this->answers[$key]
+                    : $answer = Str::repeat('_', 15);
+
+                return htmlspecialchars($answer);
             }
 
             return $matches[0];

@@ -63,6 +63,7 @@ class Contract extends Model
             string: $helper->render(),
             data: [
                 'contractHelper' => $helper,
+                'answers'        => optional($answers),
             ],
         );
     }

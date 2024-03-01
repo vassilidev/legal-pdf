@@ -18,6 +18,15 @@ class UpdateContract extends Component
         ],
     ];
 
+    public string $loop = '';
+
+    public function mount(): void
+    {
+        $this->loop = '@foreach($answers[\'\'] as $answer)<br>
+                        {{ $answer }}<br>
+                        @endforeach';
+    }
+
     public function render()
     {
         return view('livewire.update-contract');

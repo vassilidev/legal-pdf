@@ -18,11 +18,24 @@
 
         let schema = @js($contract->form_schema);
 
-        function renderForm(schema) {
-            Formio.createForm(document.getElementById('render'), schema);
+        function addKeyToLabel(component) {
+            if (component.label && component.key) {
+                component.label += ' <small class="text-secondary fw-bold">(' + component.key + ')</small>';
+            }
+            if (component.components) {
+                component.components.forEach(childComponent => {
+                    addKeyToLabel(childComponent); // Recursively handle nested components
+                });
+            }
         }
 
-        renderForm(schema)
+        function renderForm(schema) {
+            Formio.createForm(document.getElementById('render'), schema);
+
+            addKeyToLabel(schema)
+        }
+
+        renderForm(schema);
 
         Formio.builder(document.getElementById('builder'), schema).then(function (form) {
             formBuilder = form;
