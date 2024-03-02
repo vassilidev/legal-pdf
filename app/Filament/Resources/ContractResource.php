@@ -22,6 +22,11 @@ class ContractResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-document-text';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

@@ -14,7 +14,7 @@ class EditorUiSeeder extends Seeder
     {
         EditorUi::query()->insert([
             [
-                'name'    => '$answers',
+                'name'    => 'answers php',
                 'content' => '{{ $answers[\'\'] }}'
             ],
             [

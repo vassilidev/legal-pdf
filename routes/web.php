@@ -17,8 +17,7 @@ Route::middleware('auth:web')
 
 Route::get('pdf/contract/{contract}', [ContractSessionController::class, 'render'])->name('pdf.contract');
 
-Route::redirect('/login', '/admin/login')->name('login');
-
-Route::redirect('/', '/admin/login');
+Route::redirect('/login', '/app/login')->name('login');
+Route::redirect('/', '/app/login');
 
 Route::view('test', 'test');

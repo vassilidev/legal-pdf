@@ -18,21 +18,14 @@
 
         let schema = @js($contract->form_schema);
 
-        function addKeyToLabel(component) {
-            if (component.label && component.key) {
-                component.label += ' <small class="text-secondary fw-bold">(' + component.key + ')</small>';
-            }
-            if (component.components) {
-                component.components.forEach(childComponent => {
-                    addKeyToLabel(childComponent); // Recursively handle nested components
-                });
-            }
-        }
-
         function renderForm(schema) {
-            Formio.createForm(document.getElementById('render'), schema);
+            Formio.createForm(document.getElementById('render'), schema).then(function (form) {
+                form.components.forEach(component => {
+                    let el = component.element.querySelector('label');
 
-            addKeyToLabel(schema)
+                    el.innerHTML = el.innerHTML + ' (<small>' + component.key + '</small>)';
+                });
+            });
         }
 
         renderForm(schema);
@@ -42,7 +35,8 @@
         }).then(function (form) {
             formBuilder = form;
             form.on('change', function () {
-                @this.set('formSchema', form.schema);
+                @this.
+                set('formSchema', form.schema);
 
                 renderForm(form.schema);
             });
