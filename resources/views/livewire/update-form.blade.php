@@ -23,7 +23,9 @@
                 form.components.forEach(component => {
                     let el = component.element.querySelector('label');
 
-                    el.innerHTML = el.innerHTML + ' (<small>' + component.key + '</small>)';
+                    if (el) {
+                        el.innerHTML = el.innerHTML + ' (<small>' + component.key + '</small>)';
+                    }
                 });
             });
         }
