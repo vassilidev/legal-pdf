@@ -81,7 +81,7 @@ class ContractHelper
 
     public function replaceDynamicValues(string $markdown): string
     {
-        $pattern = '/#(?:contract|answers)->(.+)#/';
+        $pattern = '/#(?:contract|answers)->(\w+)#/';
 
         return preg_replace_callback($pattern, function ($matches) {
             $key = $matches[1];
@@ -102,7 +102,7 @@ class ContractHelper
         }, $markdown);
     }
 
-    public function replaceEscapeString(string $markdown): string
+    public function replaceEscapeString(?string $markdown): string
     {
         return Str::replace(array_keys($this->replaceString), array_values($this->replaceString), $markdown);
     }

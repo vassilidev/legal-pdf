@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateContract extends CreateRecord
 {
     protected static string $resource = ContractResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return route('backoffice.contract.edit', $this->record);
+    }
 }

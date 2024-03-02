@@ -37,7 +37,9 @@
 
         renderForm(schema);
 
-        Formio.builder(document.getElementById('builder'), schema).then(function (form) {
+        Formio.builder(document.getElementById('builder'), schema, {
+            noDefaultSubmitButton: true,
+        }).then(function (form) {
             formBuilder = form;
             form.on('change', function () {
                 @this.set('formSchema', form.schema);

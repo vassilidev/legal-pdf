@@ -15,5 +15,12 @@ class ContractObserver
         if (!$contract->slug) {
             $contract->slug = Str::slug($contract->name);
         }
+
+        if (!$contract->form_schema) {
+            $contract->form_schema = [
+                'display'    => 'form',
+                'components' => [],
+            ];
+        }
     }
 }

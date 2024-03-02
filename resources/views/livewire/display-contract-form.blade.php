@@ -1,15 +1,14 @@
 <div>
     <div>
-        @if(optional($contract->form_schema)['display'] === 'wizard')
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped" id="progressBar" role="progressbar"></div>
-            </div>
-        @endif
-
-        <div class="card mx-5">
+        <div class="card mx-5" wire:ignore>
+            @if(optional($contract->form_schema)['display'] === 'wizard')
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" id="progressBar" role="progressbar"></div>
+                </div>
+            @endif
             <div class="card-body p-4 shadow bg-light">
                 <h2>{{ $contract->name }}</h2>
-                <div id="form" wire:ignore></div>
+                <div id="form"></div>
             </div>
         </div>
     </div>
@@ -25,6 +24,7 @@
     <script>
         Formio.createForm(document.getElementById('form'), @js($contract->form_schema), {
             buttonSettings: {
+                showSubmit: false,
                 showCancel: false,
             },
         }).then(function (form) {
@@ -39,7 +39,7 @@
             let totalPages = form?.pages?.length ?? 0;
 
             if (totalPages) {
-                updateProgressBar(0, totalPages);
+                updateProgressBar(form.page);
             }
 
             form.on('nextPage', (page) => updateProgressBar(page.page))
