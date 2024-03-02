@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\EditorUi;x
+use App\Models\EditorUi;
 use Illuminate\Database\Seeder;
 
 class EditorUiSeeder extends Seeder
