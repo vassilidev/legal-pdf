@@ -27,6 +27,8 @@
             <div class="card-body">
                 <a class="btn btn-sm btn-primary mb-4" href="{{ route('startContractForm', $contract) }}"
                    target="_blank">Public Form</a>
+                <a class="btn btn-sm btn-primary mb-4" href="{{ route('pdf.contract', $contract) }}"
+                   target="_blank">PDF Contract</a>
                 <livewire:update-contract :contract="$contract"/>
             </div>
         </div>

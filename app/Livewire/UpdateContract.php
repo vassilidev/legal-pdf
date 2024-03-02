@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Contract;
+use App\Models\EditorUi;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class UpdateContract extends Component
@@ -20,11 +22,19 @@ class UpdateContract extends Component
 
     public string $loop = '';
 
+    private $editorUis;
+    private string $templateNames = '';
+
     public function mount(): void
     {
-        $this->loop = '@foreach($answers[\'\'] as $answer)<br>
-                        {{ $answer }}<br>
-                        @endforeach';
+        $this->editorUis = EditorUi::all();
+
+        $names = $this->editorUis
+            ->pluck('name')
+            ->map(fn($value) => Str::slug($value))
+            ->toArray();
+
+        $this->templateNames = implode(' ', $names);
     }
 
     public function render()

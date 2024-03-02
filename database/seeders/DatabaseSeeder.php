@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\EditorUi;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ContractSeeder::class,
+            EditorUiSeeder::class,
         ]);
     }
 }
