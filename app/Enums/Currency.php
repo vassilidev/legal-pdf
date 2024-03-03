@@ -4,8 +4,8 @@ namespace App\Enums;
 enum Currency: string
 {
     // Major currencies
-    case USD = 'usd';
     case EUR = 'eur';
+    case USD = 'usd';
     case GBP = 'gbp';
     case JPY = 'jpy';
     case AUD = 'aud';

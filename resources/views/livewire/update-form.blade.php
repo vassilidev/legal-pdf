@@ -21,7 +21,7 @@
         function renderForm(schema) {
             Formio.createForm(document.getElementById('render'), schema).then(function (form) {
                 form.components.forEach(component => {
-                    let el = component.element.querySelector('label');
+                    let el = component.element?.querySelector('label');
 
                     if (el) {
                         el.innerHTML = el.innerHTML + ' (<small>' + component.key + '</small>)';
