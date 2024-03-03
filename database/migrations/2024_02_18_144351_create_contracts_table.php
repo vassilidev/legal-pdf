@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->boolean('is_published')->default(false);
             $table->unsignedBigInteger('price')->default(0);
             $table->unsignedBigInteger('signature_price')->default(0);
+            /** @see \App\Enums\Currency */
+            $table->string('currency');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();

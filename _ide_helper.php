@@ -5,7 +5,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 10.44.0.
+ * Generated for Laravel 10.46.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -8986,7 +8986,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Process\PendingProcess tty(bool $tty = true)
      * @method static \Illuminate\Process\PendingProcess options(array $options)
      * @method static \Illuminate\Contracts\Process\ProcessResult run(array|string|null $command = null, callable|null $output = null)
-     * @method static \Illuminate\Process\InvokedProcess start(array|string|null $command = null, callable $output = null)
+     * @method static \Illuminate\Process\InvokedProcess start(array|string|null $command = null, callable|null $output = null)
      * @method static \Illuminate\Process\PendingProcess withFakeHandlers(array $fakeHandlers)
      * @method static \Illuminate\Process\PendingProcess|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
      * @method static \Illuminate\Process\PendingProcess|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
@@ -9834,7 +9834,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->tooManyAttempts($key, $maxAttempts);
         }
                     /**
-         * Increment the counter for a given key for a given decay time.
+         * Increment (by 1) the counter for a given key for a given decay time.
          *
          * @param string $key
          * @param int $decaySeconds
@@ -9844,6 +9844,19 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Cache\RateLimiter $instance */
                         return $instance->hit($key, $decaySeconds);
+        }
+                    /**
+         * Increment the counter for a given key for a given decay time by a given amount.
+         *
+         * @param string $key
+         * @param int $decaySeconds
+         * @param int $amount
+         * @return int 
+         * @static 
+         */        public static function increment($key, $decaySeconds = 60, $amount = 1)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->increment($key, $decaySeconds, $amount);
         }
                     /**
          * Get the number of attempts for the given key.
@@ -17314,7 +17327,7 @@ namespace Barryvdh\Debugbar\Facades {
          * Returns a JavascriptRenderer for this instance
          *
          * @param string $baseUrl
-         * @param string $basePathng
+         * @param string $basePath
          * @return \Barryvdh\Debugbar\JavascriptRenderer 
          * @static 
          */        public static function getJavascriptRenderer($baseUrl = null, $basePath = null)
@@ -18382,6 +18395,15 @@ namespace Opcodes\LogViewer\Facades {
      *
      * @see \Opcodes\LogViewer\LogViewerService
      */        class LogViewer {
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function timezone()
+        {
+                        /** @var \Opcodes\LogViewer\LogViewerService $instance */
+                        return $instance->timezone();
+        }
                     /**
          * 
          *
@@ -23824,6 +23846,31 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->joinSub($query, $as, $first, $operator, $second, $type, $where);
+            }
+                            /**
+             * Add a lateral join clause to the query.
+             *
+             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|string $query
+             * @param string $as
+             * @param string $type
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */            public static function joinLateral($query, $as, $type = 'inner')
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->joinLateral($query, $as, $type);
+            }
+                            /**
+             * Add a lateral left join to the query.
+             *
+             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|string $query
+             * @param string $as
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */            public static function leftJoinLateral($query, $as)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->leftJoinLateral($query, $as);
             }
                             /**
              * Add a left join to the query.

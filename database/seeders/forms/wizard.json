@@ -1,0 +1,41 @@
+{
+  "display": "wizard",
+  "components": [
+    {
+      "key": "page1",
+      "type": "panel",
+      "input": false,
+      "label": "Page 1",
+      "title": "Page 1",
+      "tableView": false,
+      "components": [
+        {
+          "key": "prenom",
+          "type": "textfield",
+          "input": true,
+          "label": "Prénom",
+          "tableView": true,
+          "applyMaskOn": "change"
+        }
+      ]
+    },
+    {
+      "key": "page2",
+      "type": "panel",
+      "input": false,
+      "label": "Page 2",
+      "title": "Page 2",
+      "tableView": false,
+      "components": [
+        {
+          "key": "nom",
+          "type": "textfield",
+          "input": true,
+          "label": "Nom",
+          "tableView": true,
+          "applyMaskOn": "change"
+        }
+      ]
+    }
+  ]
+}

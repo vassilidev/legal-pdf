@@ -1,12 +1,17 @@
 <?php
 
 use App\Http\Controllers\Backoffice\ContractController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Pdf\ContractSessionController;
+use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/{contract}/start', function (\App\Models\Contract $contract) {
-    return view('backoffice.startContractForm', compact('contract'));
-})->name('startContractForm');
+Route::get('/start/{contract}', [SurveyController::class, 'start'])->name('survey.start');
+Route::post('/start/{contract}', [SurveyController::class, 'process'])->name('survey.process');
+
+Route::get('/payment/{order}', [OrderController::class, 'paymentView'])->name('order.payment-view');
+Route::post('/payment/{order}', [OrderController::class, 'processPayment'])->name('order.process-payment');
+Route::get('/payment/{order}/succeeded', [OrderController::class, 'succeeded'])->name('order.succeeded');
 
 Route::middleware('auth:web')
     ->prefix('backoffice/')
@@ -19,5 +24,3 @@ Route::get('pdf/contract/{contract}', [ContractSessionController::class, 'render
 
 Route::redirect('/login', '/app/login')->name('login');
 Route::redirect('/', '/app/login');
-
-Route::view('test', 'test');

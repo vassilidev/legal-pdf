@@ -15,6 +15,7 @@ namespace App\Models{
 /**
  * App\Models\Contract
  *
+ * @property-read mixed $final_schema
  * @property int $id
  * @property string $name
  * @property string $slug
@@ -27,6 +28,9 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \App\Enums\Currency $currency
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read int|null $orders_count
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\ContractFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Contract newModelQuery()
@@ -55,6 +59,70 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\EditorUi
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $content
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|EditorUi withoutTrashed()
+ */
+	class EditorUi extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Order
+ *
+ * @property string $id
+ * @property string $email
+ * @property int $price
+ * @property array|null $answers
+ * @property int $contract_id
+ * @property string $payment_intent_id
+ * @property \App\Enums\Stripe\PaymentIntentStatus $payment_status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \App\Enums\Currency $currency
+ * @property-read \App\Models\Contract|null $contract
+ * @property-read mixed $stripe_payment_intent
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereAnswers($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereContractId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaymentIntentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaymentStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order withoutTrashed()
+ */
+	class Order extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
@@ -65,6 +133,7 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null $stripe_id
  * @property string|null $pm_type
  * @property string|null $pm_last_four
@@ -73,6 +142,10 @@ namespace App\Models{
  * @property-read int|null $contracts_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
+ * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Cashier\Subscription> $subscriptions
  * @property-read int|null $subscriptions_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
@@ -82,8 +155,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User onGenericTrial()
+ * @method static \Illuminate\Database\Eloquent\Builder|User onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
@@ -95,6 +172,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereStripeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTrialEndsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User withoutTrashed()
  */
 	class User extends \Eloquent implements \Filament\Models\Contracts\FilamentUser {}
 }
