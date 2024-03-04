@@ -10,7 +10,8 @@ class ContractHelper
     public array $replaceFunctions = [
         '#nextArticleNumber#' => '{{ $contractHelper->getNextArticleNumber() }}',
         '#articleNumber#'     => '{{ $contractHelper->getArticleNumber() }}',
-        '#pageBreak#'         => "<div class='page-break'></div>"
+        '#startBlur#'         => "<span class='blur'>",
+        '#endBlur#'           => "</span>",
     ];
 
     public array $replaceString = [

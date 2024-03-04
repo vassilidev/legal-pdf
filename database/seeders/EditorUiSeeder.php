@@ -30,6 +30,14 @@ class EditorUiSeeder extends Seeder
                 'content' => '#articleNumber#'
             ],
             [
+                'name'    => 'Start Blur',
+                'content' => '#startBlur#',
+            ],
+            [
+                'name'    => 'End blur',
+                'content' => '#endBlur#',
+            ],
+            [
                 'name'    => 'Loop',
                 'content' => '@foreach($answers[\'\'] ?? [] as $answer)<br>
                     {{ $answer }}<br>

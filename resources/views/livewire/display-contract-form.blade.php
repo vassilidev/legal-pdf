@@ -93,5 +93,10 @@
             background: url(https://i.ibb.co/09Jvc9s/Mask-group.png);
             background-repeat: round;
         }
+
+        .blur {
+            color: transparent;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
     </style>
 @endpush
