@@ -15,19 +15,45 @@
 @push('js')
     <script>
         var formBuilder;
+        var formRender;
 
         let schema = @js($contract->form_schema);
 
         function renderForm(schema) {
             Formio.createForm(document.getElementById('render'), schema).then(function (form) {
-                form.components.forEach(component => {
-                    let el = component.element?.querySelector('label');
-
-                    if (el) {
-                        el.innerHTML = el.innerHTML + ' (<small>' + component.key + '</small>)';
-                    }
+                form.on('prevPage', () => {
+                    traverseComponents(form.components);
                 });
+
+                form.on('nextPage', () => {
+                    traverseComponents(form.components);
+                });
+
+                form.on('wizardPageSelected', () => {
+                    traverseComponents(form.components);
+                });
+
+                formRender = form;
+
+                function traverseComponents(components) {
+                    components.forEach(component => {
+                        renderLabelName(component);
+                        if (component.components) {
+                            traverseComponents(component.components);
+                        }
+                    });
+                }
+
+                traverseComponents(form.components);
             });
+        }
+
+        function renderLabelName(component) {
+            let el = component.element?.querySelector('label');
+
+            if (el) {
+                el.innerHTML = component.label + ' (<small>' + component.key + '</small>)';
+            }
         }
 
         renderForm(schema);
@@ -37,8 +63,7 @@
         }).then(function (form) {
             formBuilder = form;
             form.on('change', function () {
-                @this.
-                set('formSchema', form.schema);
+                @this.set('formSchema', form.schema);
 
                 renderForm(form.schema);
             });
