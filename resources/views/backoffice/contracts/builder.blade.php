@@ -1,9 +1,9 @@
 @extends('layouts.backoffice')
 
 @section('content')
-    <section class="container-fluid">
+    <section class="container px-4">
         <div class="row">
-            <div class="col">
+            <div class="col-lg">
                 <div class="card my-4">
                     <div class="card-header">
                         Form builder
@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4">
                 <div class="card my-4">
                     <div class="card-header">
                         Form Render
