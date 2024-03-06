@@ -2,6 +2,8 @@
     <div wire:ignore>
         <textarea id="contractBuilder">{{ $contract->content }}</textarea>
     </div>
+
+    <button onclick="saveContent()" class="btn btn-success">Update Contract</button>
 </div>
 
 @push('js')
@@ -9,33 +11,41 @@
             referrerpolicy="origin"></script>
 
     <script>
-        tinymce.PluginManager.add('customButtons', function (editor) {
-            @foreach($this->editorUis ?? [] as $template)
-
-            editor.ui.registry.addButton(@js(Str::slug($template->name)), {
-                text: @js($template->name),
-                onAction: function () {
-                    editor.insertContent(@js($template->content));
-                }
-            });
-
-            @endforeach
-        });
-
         let contractEditor = tinymce.init({
             selector: '#contractBuilder',
+            toolbar_sticky: true,
             forced_root_block: false,
-            plugins: 'customButtons anchor autoresize autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tableofcontents footnotes autocorrect typography inlinecss',
-            toolbar: '{{ $this->templateNames }} | undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            setup: (editor) => {
-                editor.on('init change', function () {
-                    editor.save();
+            plugins: 'anchor autoresize autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tableofcontents footnotes autocorrect typography inlinecss',
+            toolbar: 'helpers | undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            setup: function (editor) {
+                var items = [];
+
+                @foreach($this->editorUis ?? [] as $template)
+
+                items.push({
+                    type: 'menuitem',
+                    text: @js($template->name),
+                    onAction: function () {
+                        editor.insertContent(@js($template->content));
+                    }
                 });
-                editor.on("change", (e) => {
-                    @this.
-                    set('content', editor.getContent())
+
+                @endforeach
+
+                editor.ui.registry.addMenuButton('helpers', {
+                    text: 'Helpers',
+                    fetch: function (callback) {
+                        callback(items);
+                    }
                 });
             }
         });
+
+        function saveContent() {
+            let content = tinymce.activeEditor.getContent();
+
+            @this.
+            set('content', content)
+        }
     </script>
 @endpush

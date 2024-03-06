@@ -1,7 +1,7 @@
 @extends('layouts.backoffice')
 
 @section('content')
-    <section class="container px-4">
+    <section class="container" style="max-width: 1400px !important;">
         <div class="row">
             <div class="col-lg">
                 <div class="card my-4">

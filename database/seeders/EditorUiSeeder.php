@@ -18,24 +18,24 @@ class EditorUiSeeder extends Seeder
                 'content' => '{{ $answers[\'\'] }}'
             ],
             [
-                'name'    => '#answers#',
-                'content' => '#answers->#'
+                'name'    => '[answers]',
+                'content' => '[answers->]'
             ],
             [
                 'name'    => 'Next Article Number',
-                'content' => '#nextArticleNumber#'
+                'content' => '[nextArticleNumber]'
             ],
             [
                 'name'    => 'Article Number',
-                'content' => '#articleNumber#'
+                'content' => '[articleNumber]'
             ],
             [
                 'name'    => 'Start Blur',
-                'content' => '#startBlur#',
+                'content' => '[startBlur]',
             ],
             [
                 'name'    => 'End blur',
-                'content' => '#endBlur#',
+                'content' => '[endBlur]',
             ],
             [
                 'name'    => 'Loop',
@@ -44,8 +44,12 @@ class EditorUiSeeder extends Seeder
                     @endforeach'
             ],
             [
+                'name'    => 'Signature',
+                'content' => '[signature]'
+            ],
+            [
                 'name'    => 'New PDF Page',
-                'content' => '<pre>#pageBreak#</pre>'
+                'content' => '<pre>[pageBreak]</pre>'
             ]
         ]);
     }

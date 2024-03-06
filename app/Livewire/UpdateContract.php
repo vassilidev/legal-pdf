@@ -15,8 +15,7 @@ class UpdateContract extends Component
 
     public array $rules = [
         'content' => [
-            'required',
-            'string',
+            'nullable',
         ],
     ];
 

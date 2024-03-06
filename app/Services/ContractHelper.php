@@ -8,10 +8,10 @@ use Illuminate\Support\Str;
 class ContractHelper
 {
     public array $replaceFunctions = [
-        '#nextArticleNumber#' => '{{ $contractHelper->getNextArticleNumber() }}',
-        '#articleNumber#'     => '{{ $contractHelper->getArticleNumber() }}',
-        '#startBlur#'         => "<span class='blur'>",
-        '#endBlur#'           => "</span>",
+        '[nextArticleNumber]' => '{{ $contractHelper->getNextArticleNumber() }}',
+        '[articleNumber]'     => '{{ $contractHelper->getArticleNumber() }}',
+        '[startBlur]'         => "<span class='blur'>",
+        '[endBlur]'           => "</span>",
     ];
 
     public array $replaceString = [
@@ -82,19 +82,19 @@ class ContractHelper
 
     public function replaceDynamicValues(string $markdown): string
     {
-        $pattern = '/#(?:contract|answers)->(\w+)#/';
+        $pattern = '/\[(?:contract|answers)->(\w+)]/';
 
         return preg_replace_callback($pattern, function ($matches) {
             $key = $matches[1];
 
-            if (Str::startsWith($matches[0], "#contract")) {
+            if (Str::startsWith($matches[0], "[contract")) {
                 return $this->contract->getAttribute($key) ?? $matches[0];
             }
 
-            if (Str::startsWith($matches[0], "#answers")) {
+            if (Str::startsWith($matches[0], "[answers")) {
                 $answer = (!empty($this->answers[$key]))
                     ? $this->answers[$key]
-                    : $answer = Str::repeat('_', 15);
+                    : Str::repeat('_', 15);
 
                 return htmlspecialchars($answer);
             }
