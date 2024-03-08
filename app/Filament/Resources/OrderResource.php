@@ -48,9 +48,7 @@ class OrderResource extends Resource
                     ->relationship('contract', 'name'),
                 Forms\Components\TextInput::make('price')
                     ->formatStateUsing(function (Order $order) {
-                        return $order->price / 100
-                            . $order->currency->getSymbol()
-                            . ' (' . $order->currency->name . ')';
+                        return formatCurrency($order->getTotalDue(), $order->currency);
                     }),
                 Forms\Components\Select::make('currency')
                     ->options(Currency::class),
@@ -71,17 +69,25 @@ class OrderResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->toggleable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->getStateUsing(function (Order $order) {
-                        return $order->price / 100
-                            . $order->currency->getSymbol()
-                            . ' (' . $order->currency->name . ')';
+                        return formatCurrency($order->getTotalDue(), $order->currency);
                     })
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('contract.name')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('invoicing_name')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('invoicing_address')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->toggleable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -95,6 +101,9 @@ class OrderResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make()
+                    ->label('Final')
+                    ->url(fn(Order $order) => route('order.succeeded', $order)),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
             ])
