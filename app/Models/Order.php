@@ -58,6 +58,8 @@ class Order extends Model
     {
         $price = 0;
 
+        $this->load('products');
+
         foreach ($this->products as $product) {
             $price += $product->getTotalPrice();
         }

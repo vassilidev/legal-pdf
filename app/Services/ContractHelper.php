@@ -14,6 +14,7 @@ class ContractHelper
         '[signature]'         => '{!! $contractHelper->getSignature() !!}',
         '[startBlur]'         => "<div class='blur'>",
         '[endBlur]'           => "</div>",
+        '[pageBreak]'         => "<div class='page-break'></div>"
     ];
 
     public array $replaceString = [
