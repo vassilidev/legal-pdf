@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Contract;
+use App\Models\Order;
 use Illuminate\Support\Str;
 
 class ContractHelper
@@ -10,20 +11,26 @@ class ContractHelper
     public array $replaceFunctions = [
         '[nextArticleNumber]' => '{{ $contractHelper->getNextArticleNumber() }}',
         '[articleNumber]'     => '{{ $contractHelper->getArticleNumber() }}',
-        '[startBlur]'         => "<span class='blur'>",
-        '[endBlur]'           => "</span>",
+        '[signature]'         => '{!! $contractHelper->getSignature() !!}',
+        '[startBlur]'         => "<div class='blur'>",
+        '[endBlur]'           => "</div>",
     ];
 
     public array $replaceString = [
-        '-&gt;' => '->',
+        '-&gt;'  => '->',
+        '&quot;' => '"',
     ];
+
+    public string $signatureUrl;
 
     public function __construct(
         public readonly Contract $contract,
         public readonly array    $answers = [],
         private int              $articleNumber = 0,
+        private readonly ?Order  $order = null,
     )
     {
+        $this->signatureUrl = 'https://www.shutterstock.com/image-vector/fake-autograph-samples-handdrawn-signatures-260nw-2325821623.jpg';
     }
 
     public function getArticleNumber(): int
@@ -70,7 +77,9 @@ class ContractHelper
     {
         $content = $this->replaceEscapeString($content);
 
-        return $this->replaceFunctions($content);
+        $dynamicContent = $this->replaceFunctions($content);
+
+        return $this->parseCustomConditions($this->replaceEscapeString($dynamicContent));
     }
 
     public function replaceFunctions(?string $markdown): string
@@ -82,7 +91,7 @@ class ContractHelper
 
     public function replaceDynamicValues(string $markdown): string
     {
-        $pattern = '/\[(?:contract|answers)->(\w+)]/';
+        $pattern = '/\[(?:contract|answers|values)->(\w+)]/';
 
         return preg_replace_callback($pattern, function ($matches) {
             $key = $matches[1];
@@ -99,12 +108,40 @@ class ContractHelper
                 return htmlspecialchars($answer);
             }
 
+            if (Str::startsWith($matches[0], "[values")) {
+                $answer = '"' . ($this->answers[$key] ?? "") . '"';
+
+                return htmlspecialchars($answer);
+            }
+
             return $matches[0];
         }, $markdown);
+    }
+
+    public function getSignature(): string
+    {
+        $signature = '';
+
+        if ($this->order?->signature_option) {
+            return "<img src='$this->signatureUrl'/>";
+        }
+
+        return $signature;
     }
 
     public function replaceEscapeString(?string $markdown): string
     {
         return Str::replace(array_keys($this->replaceString), array_values($this->replaceString), $markdown);
+    }
+
+    public function parseCustomConditions(?string $markdown): string
+    {
+        return preg_replace_callback('/\[if->(.*?)\](.*?)\[endif\]/s', static function ($matches) {
+            $condition = strip_tags($matches[1]);
+
+            return eval("return $condition;")
+                ? $matches[2]
+                : '';
+        }, $markdown);
     }
 }

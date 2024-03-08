@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -25,5 +26,11 @@ class AppServiceProvider extends ServiceProvider
 
         Cashier::calculateTaxes();
         Model::shouldBeStrict(!$this->app->isProduction());
+
+        Blade::directive('money', function ($expression) {
+            [$amount, $currency] = explode(',', $expression);
+
+            return "<?php echo formatCurrency($amount, $currency); ?>";
+        });
     }
 }

@@ -14,7 +14,7 @@
         let contractEditor = tinymce.init({
             selector: '#contractBuilder',
             toolbar_sticky: true,
-            forced_root_block: false,
+            visualblocks_default_state: true,
             plugins: 'anchor autoresize autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tableofcontents footnotes autocorrect typography inlinecss',
             toolbar: 'helpers | undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
             setup: function (editor) {

@@ -12,16 +12,17 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('orders', static function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('email')->index();
-            $table->unsignedInteger('price');
             /** @see \App\Enums\Currency */
             $table->string('currency');
             $table->json('answers')->nullable();
             $table->foreignIdFor(Contract::class);
-            $table->string('payment_intent_id');
+            $table->string('payment_intent_id')->nullable();
             /** @see \App\Enums\Stripe\PaymentIntentStatus */
-            $table->string('payment_status');
+            $table->string('payment_status')->nullable();
+            $table->string('invoicing_name')->nullable();
+            $table->string('invoicing_address')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Currency;
 use Illuminate\Support\Collection;
 
 function recursiveCollect($array): Collection
@@ -13,4 +14,21 @@ function recursiveCollect($array): Collection
     }
 
     return collect($array);
+}
+
+// app/helpers.php
+
+if (!function_exists('formatCurrency')) {
+    function formatCurrency(int $price, $currency): string
+    {
+        $symbol = $currency->getSymbol();
+
+        $formattedAmount = number_format($price / 100, 2);
+
+        if ($currency === Currency::EUR) {
+            return "{$formattedAmount}{$symbol}";
+        }
+
+        return "{$symbol}{$formattedAmount}";
+    }
 }

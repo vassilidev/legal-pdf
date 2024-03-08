@@ -30,10 +30,10 @@
     Formio.createForm(document.getElementById('form'), @js($contract->final_schema), {
         buttonSettings: {
             showCancel: false,
+            showPrevious: false,
         },
     }).then(function (form) {
-        @this.
-        set('data', form.data);
+        @this.set('data', form.data);
 
         let navigation = document.querySelector('.formio-wizard-navigation');
 

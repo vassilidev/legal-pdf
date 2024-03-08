@@ -32,22 +32,29 @@
         }
     </style>
 </head>
-
 <body>
-
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-lg-6">
             <div class="card mt-5">
                 <div class="card-body">
                     <h2 class="card-title text-center">Thank You for Your Purchase!</h2>
                     <p class="card-text">We have received your order:</p>
                     <ul class="list-group">
-                        <li class="list-group-item">Item: {{ $order->contract->name }}</li>
+                        <li class="list-group-item">Contract: {{ $order->contract->name }}</li>
                         <li class="list-group-item">User: {{ $order->email }}</li>
-                        <li class="list-group-item">User: {{ $order->created_at }}</li>
-                        <li class="list-group-item">Price: {{ $order->price / 100 . $order->currency->getSymbol()}}</li>
+                        <li class="list-group-item">Date: {{ $order->created_at }}</li>
+                        <li class="list-group-item">
+                            Price: {{ formatCurrency($order->getTotalDue(), $order->currency)}}</li>
+                        <li class="list-group-item">Order: {{$order->id }}</li>
                     </ul>
+                    <hr>
+                    <a href="{{ route('pdf.contract.order', $order) }}" class="btn btn-success" target="_blank">
+                        Contract
+                    </a>
+                    <a href="{{ route('order.invoice', $order) }}" class="btn btn-primary" target="_blank">
+                        Invoice
+                    </a>
                     <p class="card-text mt-3">An invoice and the final PDF will be sent to your email shortly.</p>
                 </div>
             </div>

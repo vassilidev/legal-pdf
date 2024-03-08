@@ -68,9 +68,12 @@ class Contract extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function render(array $answers = []): string
+    public function render(
+        array  $answers = [],
+        ?Order $order = null,
+    ): string
     {
-        $helper = new ContractHelper($this, $answers);
+        $helper = new ContractHelper($this, answers: $answers, order: $order);
 
         return Blade::render(
             string: $helper->render(),
@@ -85,33 +88,35 @@ class Contract extends Model
     {
         $schema = $this->form_schema;
 
-        $schema['components'][] = [
-            "key"        => "signatureOption",
-            "type"       => "panel",
-            "input"      => false,
-            "label"      => "",
-            "title"      => "Options",
-            "tableView"  => false,
-            "components" => [
-                [
-                    "key"             => "content",
-                    "html"            => "<p><strong>Avez-vous besoin d'une signature d'un avocat sur le contrat ?</strong></p>",
-                    "type"            => "content",
-                    "input"           => false,
-                    "label"           => "Content",
-                    "tableView"       => false,
-                    "refreshOnChange" => false
-                ],
-                [
-                    "key"          => "signatureOption",
-                    "type"         => "checkbox",
-                    "input"        => true,
-                    "label"        => "Option signature d'avocat",
-                    "tableView"    => false,
-                    "defaultValue" => false
+        if ($this->signature_price) {
+            $schema['components'][] = [
+                "key"        => "signatureOption",
+                "type"       => "panel",
+                "input"      => false,
+                "label"      => "",
+                "title"      => "Options",
+                "tableView"  => false,
+                "components" => [
+                    [
+                        "key"             => "content",
+                        "html"            => "<p><strong>Avez-vous besoin d'une signature d'un avocat sur le contrat ?</strong></p>",
+                        "type"            => "content",
+                        "input"           => false,
+                        "label"           => "Content",
+                        "tableView"       => false,
+                        "refreshOnChange" => false
+                    ],
+                    [
+                        "key"          => "signatureOption",
+                        "type"         => "checkbox",
+                        "input"        => true,
+                        "label"        => "Option signature d'avocat",
+                        "tableView"    => false,
+                        "defaultValue" => false
+                    ]
                 ]
-            ]
-        ];
+            ];
+        }
 
         if (Auth::check()) {
             return $schema;

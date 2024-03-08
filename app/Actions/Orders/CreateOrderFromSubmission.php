@@ -20,13 +20,28 @@ class CreateOrderFromSubmission
 
         $signatureOption = $data->get('signatureOption') ?? false;
 
-        $price = $contract->price + ($signatureOption ? $contract->signature_price : 0);
-
-        return $contract->orders()->create([
-            'email'    => $email,
-            'answers'  => $submission,
-            'price'    => $price,
-            'currency' => $contract->currency,
+        /** @var Order $order */
+        $order = $contract->orders()->create([
+            'email'            => $email,
+            'answers'          => $submission,
+            'currency'         => $contract->currency,
+            'signature_option' => $signatureOption,
         ]);
+
+        $order->products()->create([
+            'name'       => 'PDF ' . $order->contract->name,
+            'unit_price' => $order->contract->price,
+        ]);
+
+        if ($signatureOption) {
+            $order->products()->create([
+                'name'       => 'Option Signature',
+                'unit_price' => $order->contract->signature_price,
+            ]);
+        }
+
+        $order->createPaymentIntent();
+
+        return $order;
     }
 }

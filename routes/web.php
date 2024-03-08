@@ -12,6 +12,7 @@ Route::post('/start/{contract}', [SurveyController::class, 'process'])->name('su
 Route::get('/payment/{order}', [OrderController::class, 'paymentView'])->name('order.payment-view');
 Route::post('/payment/{order}', [OrderController::class, 'processPayment'])->name('order.process-payment');
 Route::get('/payment/{order}/succeeded', [OrderController::class, 'succeeded'])->name('order.succeeded');
+Route::get('/invoice/{order}', [OrderController::class, 'invoice'])->name('order.invoice');
 
 Route::middleware('auth:web')
     ->prefix('backoffice/')
@@ -20,7 +21,8 @@ Route::middleware('auth:web')
         Route::get('builder/{contract}', [ContractController::class, 'edit'])->name('contract.edit');
     });
 
-Route::get('pdf/contract/{contract}', [ContractSessionController::class, 'render'])->name('pdf.contract');
+Route::get('pdf/contract/{contract}', [ContractSessionController::class, 'renderContract'])->name('pdf.contract');
+Route::get('pdf/contract-order/{order}', [ContractSessionController::class, 'renderOrder'])->name('pdf.contract.order');
 
 Route::redirect('/login', '/app/login')->name('login');
 Route::redirect('/', '/app/login');
