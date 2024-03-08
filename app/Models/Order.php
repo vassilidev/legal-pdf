@@ -28,8 +28,8 @@ class Order extends Model
         'payment_status',
         'currency',
         'signature_option',
-        'invoicingName',
-        'invoicingAddress',
+        'invoicing_name',
+        'invoicing_address',
     ];
 
     protected $casts = [
