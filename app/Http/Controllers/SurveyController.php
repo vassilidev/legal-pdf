@@ -9,13 +9,9 @@ use App\Models\User;
 use App\Services\SurveyService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use JsonException;
 use Stripe\Exception\ApiErrorException;
-use Stripe\PaymentIntent;
-use Stripe\Stripe;
 
 class SurveyController extends Controller
 {
@@ -27,6 +23,8 @@ class SurveyController extends Controller
 
     public function start(Contract $contract)
     {
+        abort_unless($contract->is_published, 404);
+
         return view('backoffice.startContractForm', compact('contract'));
     }
 

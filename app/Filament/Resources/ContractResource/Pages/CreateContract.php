@@ -14,4 +14,12 @@ class CreateContract extends CreateRecord
     {
         return route('backoffice.contract.edit', $this->record);
     }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['price'] *= 100;
+        $data['signature_price'] *= 100;
+
+        return $data;
+    }
 }

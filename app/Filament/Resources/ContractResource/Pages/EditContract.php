@@ -18,4 +18,12 @@ class EditContract extends EditRecord
             Actions\RestoreAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['price'] *= 100;
+        $data['signature_price'] *= 100;
+
+        return $data;
+    }
 }

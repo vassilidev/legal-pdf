@@ -1,0 +1,14 @@
+{
+  "display": "form",
+  "components": [
+    {
+      "key": "prenoms",
+      "type": "textfield",
+      "input": true,
+      "label": "Prénom",
+      "multiple": true,
+      "tableView": true,
+      "applyMaskOn": "change"
+    }
+  ]
+}

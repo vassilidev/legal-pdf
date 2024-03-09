@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Enums\Stripe\PaymentIntentStatus;
 use App\Http\Requests\PaymentRequest;
+use App\Mail\PaymentSucceeded;
 use App\Models\Order;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Pdf;
 use Stripe\Exception\ApiErrorException;
 
@@ -37,6 +38,8 @@ class OrderController extends Controller
                 'invoicing_address' => $request->get('invoicing_address'),
                 'invoicing_name'    => $request->get('invoicing_name'),
             ]);
+
+            Mail::to($order->email)->send(new PaymentSucceeded($order));
 
             return to_route('order.succeeded', $order);
         }

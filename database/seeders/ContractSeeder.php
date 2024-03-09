@@ -48,5 +48,17 @@ class ContractSeeder extends Seeder
             'signature_price' => 999,
             'currency'        => Currency::EUR,
         ]);
+
+        Contract::create([
+            'name'            => 'loop',
+            'slug'            => 'loop',
+            'form_schema'     => json_decode(file_get_contents(database_path('seeders/forms/loop.json')), true),
+            'content'         => file_get_contents(database_path('seeders/contracts/loop.html')),
+            'is_published'    => true,
+            'user_id'         => User::first()->id,
+            'price'           => 1000,
+            'signature_price' => 999,
+            'currency'        => Currency::EUR,
+        ]);
     }
 }

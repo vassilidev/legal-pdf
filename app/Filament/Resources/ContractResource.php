@@ -38,17 +38,25 @@ class ContractResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->live(debounce: 500)
+                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state)))
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price')
+                    ->numeric()
+                    ->step('0.01')
+                    ->formatStateUsing(fn(Contract $contract) => $contract->price / 100)
                     ->required(),
                 Forms\Components\TextInput::make('signature_price')
+                    ->numeric()
+                    ->formatStateUsing(fn(Contract $contract) => $contract->signature_price / 100)
+                    ->step('0.01')
                     ->nullable(),
                 Forms\Components\Select::make('currency')
                     ->searchable()
                     ->options(Currency::class),
                 Forms\Components\TextInput::make('slug')
-                    ->helperText('Url')
                     ->required()
+                    ->unique(Contract::class, 'slug', ignoreRecord: true)
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_published')
                     ->required(),

@@ -137,6 +137,13 @@ class ContractHelper
 
     public function parseCustomConditions(?string $markdown): string
     {
+        $pattern = '/@(if|for|foreach|elseif)\(([^)]*?)\)/';
+
+        $markdown = preg_replace_callback($pattern, function ($matches) {
+            $content = str_replace('&nbsp;', '', $matches[2]);
+            return '@' . $matches[1] . '(' . $content . ')';
+        }, $markdown);
+
         return preg_replace_callback('/\[if->(.*?)\](.*?)\[endif\]/s', static function ($matches) {
             $condition = strip_tags($matches[1]);
 

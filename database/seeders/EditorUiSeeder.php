@@ -22,6 +22,10 @@ class EditorUiSeeder extends Seeder
                 'content' => '[answers->]'
             ],
             [
+                'name'    => '[values]',
+                'content' => '[values->]'
+            ],
+            [
                 'name'    => 'Next Article Number',
                 'content' => '[nextArticleNumber]'
             ],
