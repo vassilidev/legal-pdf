@@ -1,9 +1,18 @@
 <div>
+    <div>
+        @if (session()->has('message'))
+            <div class="alert alert-success alert-dismissible fade show">
+                {{ session('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+    </div>
+
     <div wire:ignore>
         <textarea id="contractBuilder">{{ $contract->content }}</textarea>
     </div>
 
-    <button onclick="saveContent()" class="btn btn-success">Update Contract</button>
+    <button onclick="saveContent()" class="btn btn-success">Save Contract</button>
 </div>
 
 @push('js')

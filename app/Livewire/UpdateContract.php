@@ -48,5 +48,7 @@ class UpdateContract extends Component
         $this->contract->update([
             'content' => $content
         ]);
+
+        session()->flash('message', 'Contract saved.');
     }
 }
