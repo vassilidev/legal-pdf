@@ -54,6 +54,12 @@ class EditorUiSeeder extends Seeder
             [
                 'name'    => 'New PDF Page',
                 'content' => '<pre>[pageBreak]</pre>'
+            ],
+            [
+                'name' => '@if',
+                'content' => '@if("" == "")<br>
+                    text<br>
+                @endif',
             ]
         ]);
     }
