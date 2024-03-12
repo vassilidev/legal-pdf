@@ -34,6 +34,7 @@ class Contract extends Model
         'is_published',
         'form_schema',
         'currency',
+        'signature_url',
     ];
 
     protected $casts = [

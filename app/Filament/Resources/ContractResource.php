@@ -58,6 +58,10 @@ class ContractResource extends Resource
                     ->required()
                     ->unique(Contract::class, 'slug', ignoreRecord: true)
                     ->maxLength(255),
+                Forms\Components\TextInput::make('signature_url')
+                    ->nullable()
+                    ->url()
+                    ->maxLength(255),
                 Forms\Components\Toggle::make('is_published')
                     ->required(),
             ]);
@@ -98,6 +102,10 @@ class ContractResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('signature_price')
                     ->label('signature price in cts')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('signature_url')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),

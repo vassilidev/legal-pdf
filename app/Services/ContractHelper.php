@@ -124,7 +124,9 @@ class ContractHelper
         $signature = '';
 
         if ($this->order?->signature_option) {
-            return "<img src='$this->signatureUrl'/>";
+            $url = $this->order->contract->signature_url;
+
+            return "<img src='$url'/>";
         }
 
         return $signature;
