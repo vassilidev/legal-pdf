@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Contract;
+use Spatie\Permission\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ContractPolicy
+class RolePolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class ContractPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_contract');
+        return $user->can('view_any_role');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contract  $contract
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function view(User $user, Contract $contract): bool
+    public function view(User $user, Role $role): bool
     {
-        return $user->can('view_contract');
+        return $user->can('view_role');
     }
 
     /**
@@ -41,31 +41,31 @@ class ContractPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_contract');
+        return $user->can('create_role');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contract  $contract
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function update(User $user, Contract $contract): bool
+    public function update(User $user, Role $role): bool
     {
-        return $user->can('update_contract');
+        return $user->can('update_role');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contract  $contract
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function delete(User $user, Contract $contract): bool
+    public function delete(User $user, Role $role): bool
     {
-        return $user->can('delete_contract');
+        return $user->can('delete_role');
     }
 
     /**
@@ -76,19 +76,19 @@ class ContractPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_contract');
+        return $user->can('delete_any_role');
     }
 
     /**
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contract  $contract
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function forceDelete(User $user, Contract $contract): bool
+    public function forceDelete(User $user, Role $role): bool
     {
-        return $user->can('force_delete_contract');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -99,19 +99,19 @@ class ContractPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_contract');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contract  $contract
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function restore(User $user, Contract $contract): bool
+    public function restore(User $user, Role $role): bool
     {
-        return $user->can('restore_contract');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -122,19 +122,19 @@ class ContractPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_contract');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
      * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contract  $contract
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function replicate(User $user, Contract $contract): bool
+    public function replicate(User $user, Role $role): bool
     {
-        return $user->can('replicate_contract');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -145,7 +145,7 @@ class ContractPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_contract');
+        return $user->can('{{ Reorder }}');
     }
 
 }

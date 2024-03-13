@@ -24,11 +24,12 @@ namespace App\Models{
  * @property int $is_published
  * @property int $price
  * @property int $signature_price
+ * @property \App\Enums\Currency $currency
  * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \App\Enums\Currency $currency
+ * @property string|null $signature_url
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
  * @property-read int|null $orders_count
  * @property-read \App\Models\User $user
@@ -41,6 +42,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contract unpublished()
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereContent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereCurrency($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereFormSchema($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereId($value)
@@ -48,6 +50,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSignaturePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSignatureUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereUserId($value)
@@ -89,16 +92,20 @@ namespace App\Models{
  *
  * @property string $id
  * @property string $email
- * @property int $price
+ * @property \App\Enums\Currency $currency
  * @property array|null $answers
  * @property int $contract_id
- * @property string $payment_intent_id
- * @property \App\Enums\Stripe\PaymentIntentStatus $payment_status
+ * @property string|null $payment_intent_id
+ * @property \App\Enums\Stripe\PaymentIntentStatus|null $payment_status
+ * @property string|null $invoicing_name
+ * @property string|null $invoicing_address
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \App\Enums\Currency $currency
+ * @property bool $signature_option
  * @property-read \App\Models\Contract|null $contract
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
  * @property-read mixed $stripe_payment_intent
  * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
@@ -108,17 +115,48 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereAnswers($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereContractId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCurrency($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereInvoicingAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereInvoicingName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaymentIntentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaymentStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Order wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereSignatureOption($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Order withoutTrashed()
  */
 	class Order extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Product
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $description
+ * @property int $quantity
+ * @property int $unit_price
+ * @property string $order_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Order $order
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereUnitPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
+ */
+	class Product extends \Eloquent {}
 }
 
 namespace App\Models{

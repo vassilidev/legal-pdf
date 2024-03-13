@@ -28,6 +28,9 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\CheckboxList::make('roles')
+                    ->relationship('roles', 'name')
+                    ->searchable(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
