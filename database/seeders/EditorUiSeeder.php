@@ -60,7 +60,19 @@ class EditorUiSeeder extends Seeder
                 'content' => '@if("" == "")<br>
                     text<br>
                 @endif',
-            ]
+            ],
+            [
+                'name' => '@hour',
+                'content' => '@hour([values->])',
+            ],
+            [
+                'name' => '@datetime',
+                'content' => '@datetime([values->])',
+            ],
+            [
+                'name' => '@date',
+                'content' => '@date([values->])',
+            ],
         ]);
     }
 }
