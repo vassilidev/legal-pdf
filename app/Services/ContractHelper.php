@@ -106,13 +106,13 @@ class ContractHelper
                     ? $this->answers[$key]
                     : Str::repeat('_', 15);
 
-                return htmlspecialchars($answer);
+                return htmlspecialchars($this->escapeBladeDirectives($answer));
             }
 
             if (Str::startsWith($matches[0], "[values")) {
                 $answer = '"' . ($this->answers[$key] ?? "") . '"';
 
-                return htmlspecialchars($answer);
+                return htmlspecialchars($this->escapeBladeDirectives($answer));
             }
 
             return $matches[0];
@@ -153,5 +153,47 @@ class ContractHelper
                 ? $matches[2]
                 : '';
         }, $markdown);
+    }
+
+    public function escapeBladeDirectives($input): array|string|null
+    {
+        // List of all Blade directives
+        $bladeDirectives = [
+            'extends',
+            'section',
+            'yield',
+            'include',
+            'if',
+            'else',
+            'elseif',
+            'unless',
+            'switch',
+            'case',
+            'default',
+            'foreach',
+            'for',
+            'while',
+            'empty',
+            'isset',
+            'php',
+            'endphp',
+            'verbatim',
+            'auth',
+            'guest',
+            'endauth',
+            'endguest',
+            'inject',
+            'env',
+            'config',
+            'lang',
+            'choice',
+            'route',
+            'dd',
+            'dump'
+        ];
+
+        $pattern = '/@(' . implode('|', $bladeDirectives) . ')\b/';
+
+        return preg_replace($pattern, '$1', $input);
     }
 }
