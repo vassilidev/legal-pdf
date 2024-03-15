@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminCssController;
 use App\Http\Controllers\Backoffice\ContractController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Pdf\ContractSessionController;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Middleware\RoleMiddleware;
 
 Route::get('/start/{contract}', [SurveyController::class, 'start'])->name('survey.start');
 Route::post('/start/{contract}', [SurveyController::class, 'process'])->name('survey.process');
@@ -20,6 +22,14 @@ Route::middleware('auth:web')
     ->group(function () {
         Route::get('builder/{contract}', [ContractController::class, 'edit'])->name('contract.edit');
     });
+
+Route::group([
+    'middleware' => RoleMiddleware::using('Super Admin'),
+], function () {
+    Route::get('adminCss', [AdminCssController::class, 'render'])->name('admin-css.render');
+    Route::post('adminCss', [AdminCssController::class, 'update'])->name('admin-css.update');
+});
+
 
 Route::get('pdf/contract/{contract}', [ContractSessionController::class, 'renderContract'])->name('pdf.contract');
 Route::get('pdf/contract-order/{order}', [ContractSessionController::class, 'renderOrder'])->name('pdf.contract.order');
