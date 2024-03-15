@@ -8,9 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{ $contract->name }}</title>
     <style>
-        * {
-            font-family: DejaVu Sans, sans-serif !important;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Changa:wght@200..800&display=swap');
 
         html {
             direction: {{ $contract->direction }};

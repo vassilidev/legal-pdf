@@ -1,0 +1,11 @@
+{
+    "changa": {
+        "200": "\/var\/www\/html\/storage\/fonts\/changa_200_150392ef0dc663af8f1491299e12e858",
+        "300": "\/var\/www\/html\/storage\/fonts\/changa_300_f52b6929bac2014aa04dfd36d16f563c",
+        "normal": "\/var\/www\/html\/storage\/fonts\/changa_normal_59f45c37853006ac46a3adcc1d416d6a",
+        "500": "\/var\/www\/html\/storage\/fonts\/changa_500_3d45830ef85f53e0d837d21aa45759ec",
+        "600": "\/var\/www\/html\/storage\/fonts\/changa_600_bc1501152cd5c979fc5abe89e3740b89",
+        "bold": "\/var\/www\/html\/storage\/fonts\/changa_bold_b2de15a7444f01747e0cbcefc6bc5ce7",
+        "800": "changa_800_e211a5235dabb45e1233adf3dd7395f4"
+    }
+}
