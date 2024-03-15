@@ -25,7 +25,8 @@
             toolbar_sticky: true,
             visualblocks_default_state: true,
             plugins: 'directionality anchor autoresize autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker',
-            toolbar: 'helpers ltr rtl | undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+            toolbar: 'helpers ltr rtl lineheight | undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align | numlist bullist indent outdent | emoticons charmap | removeformat',
+            line_height_formats: '0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0',
             setup: function (editor) {
                 var items = [];
 
