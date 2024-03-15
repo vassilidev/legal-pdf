@@ -7,8 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{ $contract->name }}</title>
+    <link rel="stylesheet" href="{{ route('fontsCss') }}">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Changa:wght@200..800&display=swap');
+        {!! fontCss() !!}
 
         html {
             direction: {{ $contract->direction }};

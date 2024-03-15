@@ -8,6 +8,7 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.form.io/formiojs/formio.full.min.css'>
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ route('fontsCss') }}">
     @stack('css')
     @livewireStyles
 </head>

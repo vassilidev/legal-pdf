@@ -32,3 +32,15 @@ if (!function_exists('formatCurrency')) {
         return "{$symbol}{$formattedAmount}";
     }
 }
+
+function fontCss(bool $onlyImport = false): string
+{
+    $output = '';
+
+    foreach (\App\Models\Font::all() as $font) {
+        $output .= "/* {$font->name} */";
+        $output .= "@import url('{$font->url}');" . PHP_EOL . PHP_EOL;
+    }
+
+    return $output;
+}

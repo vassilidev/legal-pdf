@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Contract;
 use App\Models\EditorUi;
+use App\Models\Font;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -22,18 +23,21 @@ class UpdateContract extends Component
     public string $loop = '';
 
     private $editorUis;
-    private string $templateNames = '';
+
+    public string $fontNames;
+
 
     public function mount(): void
     {
         $this->editorUis = EditorUi::all();
 
-        $names = $this->editorUis
-            ->pluck('name')
-            ->map(fn($value) => Str::slug($value))
-            ->toArray();
+        $fontNames = Font::pluck('name')->implode(';');
 
-        $this->templateNames = implode(' ', $names);
+        if ($fontNames) {
+            $fontNames .= ';';
+        }
+
+        $this->fontNames = $fontNames;
     }
 
     public function render()

@@ -26,3 +26,9 @@ Route::get('pdf/contract-order/{order}', [ContractSessionController::class, 'ren
 
 Route::redirect('/login', '/app/login')->name('login');
 Route::redirect('/', '/app/login');
+
+Route::get('css/fonts.css', function () {
+    return response( fontCss(), headers: [
+        'Content-Type' => 'text/css; charset=UTF-8',
+    ]);
+})->name('fontsCss');
