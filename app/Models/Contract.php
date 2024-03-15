@@ -35,6 +35,7 @@ class Contract extends Model
         'form_schema',
         'currency',
         'signature_url',
+        'direction',
     ];
 
     protected $casts = [

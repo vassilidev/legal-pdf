@@ -53,7 +53,11 @@ class ContractResource extends Resource
                     ->nullable(),
                 Forms\Components\Select::make('currency')
                     ->searchable()
+                    ->required()
                     ->options(Currency::class),
+                Forms\Components\TextInput::make('direction')
+                    ->required()
+                    ->default('ltr'),
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->unique(Contract::class, 'slug', ignoreRecord: true)
@@ -110,6 +114,10 @@ class ContractResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('currency')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('direction')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),

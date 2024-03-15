@@ -8,8 +8,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{ $contract->name }}</title>
     <style>
-        body {
-            font-family: "Arial", sans-serif !important;
+        * {
+            font-family: DejaVu Sans, sans-serif !important;
+        }
+
+        html {
+            direction: {{ $contract->direction }};
         }
 
         .page-break {
