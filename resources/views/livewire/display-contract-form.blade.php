@@ -14,7 +14,7 @@
     </div>
 
     @if($data)
-        <div class="border border-top-0 border-4 shadow p-5" id="render">
+        <div class="border border-top-0 border-4 shadow p-5" dir="{{ $contract->direction }}" id="render">
             {!! $contract->render($data) !!}
         </div>
     @endif
