@@ -12,7 +12,7 @@
     @stack('css')
     @livewireStyles
 </head>
-<body @production oncontextmenu="return false" @endproduction>
+<body @production oncontextmenu="return false" @endproduction class="bg-light">
 <header>
     @include('layouts.backoffice.navbar')
 </header>
@@ -20,6 +20,21 @@
 <main>
     @yield('content')
 </main>
+
+<footer class="py-3 mt-4 bg-white h-100">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+    </ul>
+    <p class="text-center text-muted">
+        <img src="https://wizardx-app.legalplace.fr/static/media/logo-lp.5d53c4af.svg" alt=""><br>
+
+        © {{ date('Y') }} {{ config('app.name') }}
+    </p>
+</footer>
 
 <script src='https://cdn.form.io/formiojs/formio.full.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

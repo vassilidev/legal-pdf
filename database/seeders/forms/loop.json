@@ -1,14 +1,96 @@
 {
   "display": "form",
+  "settings": {
+    "pdf": {
+      "id": "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+      "src": "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
+    }
+  },
   "components": [
     {
-      "key": "prenoms",
-      "type": "textfield",
+      "key": "children",
+      "type": "datagrid",
       "input": true,
-      "label": "Prénom",
-      "multiple": true,
-      "tableView": true,
-      "applyMaskOn": "change"
+      "label": "Children",
+      "components": [
+        {
+          "key": "userinfo",
+          "type": "panel",
+          "label": "User Information",
+          "components": [
+            {
+              "key": "firstName",
+              "type": "textfield",
+              "input": true,
+              "label": "First Name"
+            },
+            {
+              "key": "lastName",
+              "type": "textfield",
+              "input": true,
+              "label": "Last Name"
+            },
+            {
+              "key": "gender",
+              "type": "radio",
+              "input": true,
+              "label": "Gender",
+              "values": [
+                {
+                  "label": "Male",
+                  "value": "male"
+                },
+                {
+                  "label": "Female",
+                  "value": "female"
+                }
+              ],
+              "inputType": "radio"
+            },
+            {
+              "key": "dependant",
+              "type": "checkbox",
+              "input": true,
+              "label": "Dependant",
+              "inputType": "checkbox"
+            },
+            {
+              "key": "birthdate",
+              "type": "datetime",
+              "input": true,
+              "label": "Birthdate",
+              "format": "yyyy-MM-dd hh:mm a",
+              "datePicker": {
+                "maxMode": "year",
+                "minMode": "day",
+                "initDate": "",
+                "yearRows": 4,
+                "showWeeks": true,
+                "startingDay": 0,
+                "yearColumns": 5,
+                "datepickerMode": "day"
+              },
+              "enableDate": true,
+              "enableTime": true,
+              "timePicker": {
+                "hourStep": 1,
+                "arrowkeys": true,
+                "minuteStep": 1,
+                "mousewheel": true,
+                "showMeridian": true,
+                "readonlyInput": false
+              },
+              "conditional": {
+                "eq": "true",
+                "show": "true",
+                "when": "dependant"
+              },
+              "defaultDate": "",
+              "datepickerMode": "day"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
