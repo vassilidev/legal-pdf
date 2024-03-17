@@ -14,15 +14,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * @property-read  mixed $final_schema
  */
 #[ObservedBy(ContractObserver::class)]
-class Contract extends Model
+class Contract extends Model implements HasMedia
 {
     use HasFactory,
-        SoftDeletes;
+        SoftDeletes, InteractsWithMedia;
 
     protected $fillable = [
         'user_id',
@@ -147,5 +150,10 @@ class Contract extends Model
         ];
 
         return $schema;
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('signature');
     }
 }

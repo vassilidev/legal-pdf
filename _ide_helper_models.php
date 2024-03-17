@@ -30,6 +30,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null $signature_url
+ * @property string $direction
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
  * @property-read int|null $orders_count
  * @property-read \App\Models\User $user
@@ -44,6 +45,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereCurrency($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereDirection($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereFormSchema($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereIsPublished($value)
@@ -84,6 +86,27 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|EditorUi withoutTrashed()
  */
 	class EditorUi extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Font
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $url
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Font newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Font newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Font query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Font whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Font whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Font whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Font whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Font whereUrl($value)
+ */
+	class Font extends \Eloquent {}
 }
 
 namespace App\Models{

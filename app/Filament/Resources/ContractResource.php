@@ -7,6 +7,7 @@ use App\Filament\Resources\ContractResource\Pages;
 use App\Filament\Resources\ContractResource\RelationManagers;
 use App\Models\Contract;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
@@ -55,17 +56,22 @@ class ContractResource extends Resource
                     ->searchable()
                     ->required()
                     ->options(Currency::class),
-                Forms\Components\TextInput::make('direction')
+                Forms\Components\Select::make('direction')
+                    ->options([
+                        'ltr' => 'Left to Right',
+                        'rtl' => 'Right To Left'
+                    ])
                     ->required()
                     ->default('ltr'),
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->unique(Contract::class, 'slug', ignoreRecord: true)
                     ->maxLength(255),
-                Forms\Components\TextInput::make('signature_url')
-                    ->nullable()
-                    ->url()
-                    ->maxLength(255),
+                SpatieMediaLibraryFileUpload::make('signature')
+                    ->collection('signature')
+                    ->preserveFilenames()
+                    ->columnSpanFull()
+                    ->imageEditor(),
                 Forms\Components\Toggle::make('is_published')
                     ->required(),
             ]);
@@ -109,16 +115,13 @@ class ContractResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('signature_url')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('currency')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('direction')
+                Tables\Columns\SelectColumn::make('direction')
                     ->sortable()
+                    ->options(['ltr', 'rtl'])
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('is_published')
