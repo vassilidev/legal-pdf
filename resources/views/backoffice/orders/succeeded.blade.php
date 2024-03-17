@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You for Your Purchase</title>
+    <title>@lang('after_payment.title')</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -32,30 +32,32 @@
         }
     </style>
 </head>
+
 <body>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <div class="card mt-5">
                 <div class="card-body">
-                    <h2 class="card-title text-center">Thank You for Your Purchase!</h2>
-                    <p class="card-text">We have received your order:</p>
+                    <h2 class="card-title text-center">@lang('after_payment.thank_you')</h2>
+                    <p class="card-text">@lang('after_payment.order_received')</p>
                     <ul class="list-group">
-                        <li class="list-group-item">Contract: {{ $order->contract->name }}</li>
-                        <li class="list-group-item">User: {{ $order->email }}</li>
-                        <li class="list-group-item">Date: {{ $order->created_at }}</li>
+                        <li class="list-group-item">@lang('after_payment.contract'): {{ $order->contract->name }}</li>
+                        <li class="list-group-item">@lang('after_payment.user'): {{ $order->email }}</li>
+                        <li class="list-group-item">@lang('after_payment.date'): {{ $order->created_at }}</li>
                         <li class="list-group-item">
-                            Price: {{ formatCurrency($order->getTotalDue(), $order->currency)}}</li>
-                        <li class="list-group-item">Order: {{$order->id }}</li>
+                            @lang('after_payment.price')
+                            : {{ formatCurrency($order->getTotalDue(), $order->currency)}}</li>
+                        <li class="list-group-item">@lang('after_payment.order'): {{$order->id }}</li>
                     </ul>
                     <hr>
                     <a href="{{ route('pdf.contract.order', $order) }}" class="btn btn-success" target="_blank">
-                        Contract
+                        @lang('after_payment.contract_btn')
                     </a>
                     <a href="{{ route('order.invoice', $order) }}" class="btn btn-primary" target="_blank">
-                        Invoice
+                        @lang('after_payment.invoice_btn')
                     </a>
-                    <p class="card-text mt-3">An invoice and the final PDF will be sent to your email shortly.</p>
+                    <p class="card-text mt-3">@lang('after_payment.email_notice')</p>
                 </div>
             </div>
         </div>

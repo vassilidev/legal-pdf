@@ -28,7 +28,13 @@ Route::redirect('/login', '/app/login')->name('login');
 Route::redirect('/', '/app/login');
 
 Route::get('css/fonts.css', function () {
-    return response( fontCss(), headers: [
+    return response(fontCss(), headers: [
         'Content-Type' => 'text/css; charset=UTF-8',
     ]);
 })->name('fontsCss');
+
+Route::post('lang', function () {
+    request()->session()->put('locale', request()->get('locale'));
+
+    return redirect()->back();
+})->name('update.lang');

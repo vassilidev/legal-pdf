@@ -32,8 +32,15 @@
             showCancel: false,
             showPrevious: false,
         },
+        i18n: {
+            en: {
+                submit: "@lang('common.submit')",
+                next: "@lang('common.next')"
+            }
+        }
     }).then(function (form) {
-        @this.set('data', form.data);
+        @this.
+        set('data', form.data);
 
         let navigation = document.querySelector('.formio-wizard-navigation');
 

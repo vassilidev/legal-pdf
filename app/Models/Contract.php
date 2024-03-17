@@ -104,7 +104,7 @@ class Contract extends Model implements HasMedia
                 "components" => [
                     [
                         "key"             => "content",
-                        "html"            => "<p><strong>Avez-vous besoin d'une signature d'un avocat sur le contrat ?</strong></p>",
+                        "html"            => "<p><strong>" . __('contract.signature_option_text') . "</strong></p>",
                         "type"            => "content",
                         "input"           => false,
                         "label"           => "Content",
@@ -115,7 +115,7 @@ class Contract extends Model implements HasMedia
                         "key"          => "signatureOption",
                         "type"         => "checkbox",
                         "input"        => true,
-                        "label"        => "Option signature d'avocat",
+                        "label"        => __('contract.signature_option_checkbox'),
                         "tableView"    => false,
                         "defaultValue" => false
                     ]

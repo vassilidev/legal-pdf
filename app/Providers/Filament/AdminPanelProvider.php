@@ -36,6 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                \Statikbe\FilamentTranslationManager\FilamentChainedTranslationManagerPlugin::make(),
             ])
             ->passwordReset()
             ->registration()

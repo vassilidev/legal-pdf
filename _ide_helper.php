@@ -25881,6 +25881,7 @@ namespace  {
             class Livewire extends \Livewire\Livewire {}
             class LogViewer extends \Opcodes\LogViewer\Facades\LogViewer {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
+            class FilamentTranslationManager extends \Statikbe\FilamentTranslationManager\FilamentTranslationManager {}
     }
 
 

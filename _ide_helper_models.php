@@ -29,8 +29,9 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $signature_url
  * @property string $direction
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
  * @property-read int|null $orders_count
  * @property-read \App\Models\User $user
@@ -52,14 +53,13 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSignaturePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSignatureUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Contract withoutTrashed()
  */
-	class Contract extends \Eloquent {}
+	class Contract extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models{

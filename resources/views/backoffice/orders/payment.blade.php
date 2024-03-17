@@ -6,17 +6,17 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header bg-primary text-white">
-                        <h5 class="card-title">Product Details</h5>
+                        <h5 class="card-title">@lang('order.product_details')</h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Product Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th>@lang('order.product_name')</th>
+                                    <th>@lang('order.price')</th>
+                                    <th>@lang('order.quantity')</th>
+                                    <th>@lang('order.total')</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -30,7 +30,7 @@
                                 @endforeach
                                 <tr class="table-secondary">
                                     <td colspan="2"></td>
-                                    <td class="fw-bold">Total</td>
+                                    <td class="fw-bold">@lang('order.total')</td>
                                     <td>{{ formatCurrency($order->getTotalDue(), $order->currency) }}</td>
                                 </tr>
                                 </tbody>
@@ -38,11 +38,12 @@
                         </div>
                         <!-- Add more information about the product here -->
                         <div class="mt-3 small">
-                            <p><strong>Order UUID:</strong> {{ $order->id }}</p>
-                            <p><strong>Email</strong> {{ $order->email }}</p>
-                            <p><strong>Order Date:</strong> {{ $order->created_at->format('d/m/Y H:i:s') }}</p>
-                            <p><strong>Order Link:</strong> <a
-                                        href="{{ route('order.payment-view', $order) }}">{{ route('order.payment-view', $order) }}</a>
+                            <p><strong>@lang('order.order_uuid'):</strong> {{ $order->id }}</p>
+                            <p><strong>@lang('order.email'):</strong> {{ $order->email }}</p>
+                            <p><strong>@lang('order.order_date')
+                                    :</strong> {{ $order->created_at->format('d/m/Y H:i:s') }}</p>
+                            <p><strong>@lang('order.order_link'):</strong> <a
+                                    href="{{ route('order.payment-view', $order) }}">{{ route('order.payment-view', $order) }}</a>
                             </p>
                         </div>
                     </div>
@@ -51,7 +52,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header bg-success text-white">
-                        <h5 class="card-title">Payment and Invoice Details</h5>
+                        <h5 class="card-title">@lang('order.payment_details')</h5>
                     </div>
                     <div class="card-body">
                         <form id="payment-form" action="{{ route('order.process-payment', $order) }}" method="POST">
@@ -62,45 +63,45 @@
 
 
                             <div class="mb-3">
-                                <label for="card-holder-name" class="form-label">Card Holder Name</label>
+                                <label for="card-holder-name" class="form-label">@lang('order.card_holder')</label>
                                 <input type="text"
                                        name="cardHolder"
                                        class="form-control"
                                        id="card-holder-name"
-                                       placeholder="John Doe">
+                                       placeholder="@lang('order.card_holder_placeholder')">
                             </div>
                             <div class="mb-3">
-                                <label for="card-element" class="form-label">Card Details</label>
+                                <label for="card-element" class="form-label">@lang('order.card_details')</label>
                                 <div id="card-element" class="form-control"></div>
                             </div>
                             <hr>
-                            <h5>Invoicing</h5>
+                            <h5>@lang('order.invoicing')</h5>
                             <div class="mb-3">
-                                <label for="invoice-name" class="form-label">Name</label>
+                                <label for="invoice-name" class="form-label">@lang('order.invoicing_name')</label>
                                 <input type="text"
                                        class="form-control"
                                        id="invoice-name"
                                        name="invoicing_name"
-                                       placeholder="John Doe"
+                                       placeholder="@lang('order.invoicing_name_placeholder')"
                                        required>
                                 @error('invoicing_name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="invoice-address" class="form-label">Address</label>
+                                <label for="invoice-address" class="form-label">@lang('order.invoicing_address')</label>
                                 <input type="text"
                                        class="form-control"
                                        id="invoice-address"
                                        name="invoicing_address"
-                                       placeholder="123 Main St, City, Country"
+                                       placeholder="@lang('order.invoicing_address_placeholder')"
                                        required>
                                 @error('invoicing_address')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <button id="payment-button" class="btn btn-primary">
-                                <span id="payment-btn-text">Pay Now</span>
+                                <span id="payment-btn-text">@lang('order.pay_now')</span>
                                 <span id="payment-btn-loader" class="spinner-border spinner-border-sm d-none"
                                       role="status"
                                       aria-hidden="true"></span>
@@ -155,7 +156,7 @@
                     paymentErrorMessage.classList.remove('d-none');
 
                     paymentButton.disabled = false;
-                    paymentBtnText.textContent = 'Pay Now';
+                    paymentBtnText.textContent = '@lang('order.pay_now')';
                     paymentBtnLoader.classList.add('d-none');
                 } else {
                     form.submit();
