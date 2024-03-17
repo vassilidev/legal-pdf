@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Enums\Stripe\PaymentIntentStatus;
 use App\Models\Order;
 use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
@@ -13,7 +14,7 @@ class OrderChart extends ChartWidget
 
     protected function getData(): array
     {
-        $data = Trend::model(Order::class)
+        $data = Trend::query(Order::wherePaymentStatus(PaymentIntentStatus::SUCCEEDED))
             ->between(
                 start: now()->subMonth(),
                 end: now(),
