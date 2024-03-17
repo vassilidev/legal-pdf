@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ContractSeeder::class,
             EditorUiSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }

@@ -90,20 +90,7 @@
             display: none;
         }
 
-        #render {
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-            -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-            background: url(https://i.ibb.co/09Jvc9s/Mask-group.png);
-            background-repeat: round;
-        }
+        {{ setting('contract.css') }}
 
-        .blur {
-            color: transparent;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
     </style>
 @endpush

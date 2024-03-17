@@ -89,65 +89,31 @@ class Contract extends Model implements HasMedia
         );
     }
 
+    /**
+     * @throws \JsonException
+     */
     public function getFinalSchemaAttribute(): array
     {
         $schema = $this->form_schema;
 
         if ($this->signature_price) {
-            $schema['components'][] = [
-                "key"        => "signatureOption",
-                "type"       => "panel",
-                "input"      => false,
-                "label"      => "",
-                "title"      => "Options",
-                "tableView"  => false,
-                "components" => [
-                    [
-                        "key"             => "content",
-                        "html"            => "<p><strong>" . __('contract.signature_option_text') . "</strong></p>",
-                        "type"            => "content",
-                        "input"           => false,
-                        "label"           => "Content",
-                        "tableView"       => false,
-                        "refreshOnChange" => false
-                    ],
-                    [
-                        "key"          => "signatureOption",
-                        "type"         => "checkbox",
-                        "input"        => true,
-                        "label"        => __('contract.signature_option_checkbox'),
-                        "tableView"    => false,
-                        "defaultValue" => false
-                    ]
-                ]
-            ];
+            $schema['components'][] = json_decode(str_replace(
+                '{{ contract.signature_option_text }}',
+                __('contract.signature_option_text'),
+                setting('builder.signature_component')
+            ), true, 512, JSON_THROW_ON_ERROR);
         }
+
 
         if (Auth::check()) {
             return $schema;
         }
 
-        $schema['components'][] = $data = [
-            "key"        => "finalPage",
-            "type"       => "panel",
-            "input"      => false,
-            "label"      => "",
-            "title"      => "",
-            "tableView"  => false,
-            "components" => [
-                [
-                    "key"         => "surveyUserEmail",
-                    "type"        => "email",
-                    "input"       => true,
-                    "label"       => "Adresse Email",
-                    "tableView"   => true,
-                    "applyMaskOn" => "change",
-                    "validate"    => [
-                        'required' => true,
-                    ],
-                ]
-            ]
-        ];
+        $schema['components'][] = json_decode(str_replace(
+            '{{ contract.email_option_text }}',
+            __('contract.email_option_text'),
+            setting('builder.final_component')
+        ), true, 512, JSON_THROW_ON_ERROR);
 
         return $schema;
     }

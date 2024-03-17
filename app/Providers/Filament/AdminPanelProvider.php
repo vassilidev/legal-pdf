@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Settings\Settings;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Exception;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -18,6 +20,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Outerweb\FilamentSettings\Filament\Plugins\FilamentSettingsPlugin;
+use Statikbe\FilamentTranslationManager\FilamentChainedTranslationManagerPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -35,8 +39,12 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                \Statikbe\FilamentTranslationManager\FilamentChainedTranslationManagerPlugin::make(),
+                FilamentShieldPlugin::make(),
+                FilamentChainedTranslationManagerPlugin::make(),
+                FilamentSettingsPlugin::make()
+                    ->pages([
+                        Settings::class
+                    ])
             ])
             ->passwordReset()
             ->registration()
