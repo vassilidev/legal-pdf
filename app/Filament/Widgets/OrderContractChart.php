@@ -5,11 +5,17 @@ namespace App\Filament\Widgets;
 use App\Models\Order;
 use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\TrendValue;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OrderContractChart extends ChartWidget
 {
     protected static ?string $heading = 'Order Contract';
+
+    public static function canView(): bool
+    {
+        return Auth::user()->can('widget_OrderContractChart');
+    }
 
     protected function getData(): array
     {
