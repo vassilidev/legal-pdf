@@ -39,17 +39,6 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('email_verified_at'),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('stripe_id')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('pm_type')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('pm_last_four')
-                    ->maxLength(4),
-                Forms\Components\DateTimePicker::make('trial_ends_at'),
             ]);
     }
 
@@ -112,9 +101,9 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
+            'index'  => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'edit'   => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 
