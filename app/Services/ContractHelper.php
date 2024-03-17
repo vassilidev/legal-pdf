@@ -106,6 +106,10 @@ class ContractHelper
                     ? $this->answers[$key]
                     : Str::repeat('_', 15);
 
+                if (is_array($answer)) {
+                    return '';
+                }
+
                 return htmlspecialchars($this->escapeBladeDirectives($answer));
             }
 
