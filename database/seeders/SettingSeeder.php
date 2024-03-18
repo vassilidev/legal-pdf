@@ -16,7 +16,7 @@ class SettingSeeder extends Seeder
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-            background: url(https://i.ibb.co/09Jvc9s/Mask-group.png);
+            background: white url(https://i.ibb.co/09Jvc9s/Mask-group.png);
             background-repeat: round;
         }
 

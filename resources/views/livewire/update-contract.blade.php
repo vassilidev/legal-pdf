@@ -11,8 +11,6 @@
     <div wire:ignore>
         <textarea id="contractBuilder">{{ $contract->content }}</textarea>
     </div>
-
-    <button onclick="saveContent()" class="btn btn-success">Save Contract</button>
 </div>
 
 @push('js')

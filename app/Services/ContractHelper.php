@@ -198,6 +198,6 @@ class ContractHelper
 
         $pattern = '/@(' . implode('|', $bladeDirectives) . ')\b/';
 
-        return preg_replace($pattern, '$1', $input);
+        return preg_replace($pattern, '.$1', $input);
     }
 }

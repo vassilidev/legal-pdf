@@ -25,10 +25,14 @@
         <div class="card">
             <div class="card-header">Contract editor</div>
             <div class="card-body">
-                <a class="btn btn-sm btn-primary mb-4" href="{{ route('survey.start', $contract) }}"
-                   target="_blank">Public Form</a>
-                <a class="btn btn-sm btn-primary mb-4" href="{{ route('pdf.contract', $contract) }}"
-                   target="_blank">PDF Contract</a>
+                <div class="mb-4">
+                    <a class="btn btn-sm btn-primary" href="{{ route('survey.start', $contract) }}"
+                       target="_blank">Public Form</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('pdf.contract', $contract) }}"
+                       target="_blank">PDF Contract</a>
+                    <button onclick="saveContent()" class="float-end btn btn-sm btn-success">Save Contract</button>
+                </div>
+
                 <livewire:update-contract :contract="$contract"/>
             </div>
         </div>

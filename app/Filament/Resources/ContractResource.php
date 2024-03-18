@@ -17,6 +17,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use Riodwanto\FilamentAceEditor\AceEditor;
 
 class ContractResource extends Resource
 {
@@ -74,6 +75,13 @@ class ContractResource extends Resource
                     ->imageEditor(),
                 Forms\Components\Toggle::make('is_published')
                     ->required(),
+                AceEditor::make('content')
+                    ->mode('html')
+                    ->theme('github')
+                    ->columnSpanFull()
+                    ->darkTheme('dracula')
+                    ->required()
+                    ->autosize(),
             ]);
     }
 
