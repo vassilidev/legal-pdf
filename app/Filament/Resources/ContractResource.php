@@ -80,7 +80,7 @@ class ContractResource extends Resource
                     ->theme('github')
                     ->columnSpanFull()
                     ->darkTheme('dracula')
-                    ->required()
+                    ->nullable()
                     ->autosize(),
             ]);
     }
