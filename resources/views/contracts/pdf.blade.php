@@ -10,6 +10,14 @@
     <style>
         {!! fontCss() !!}
 
+        * {
+            border: 1px solid red;
+        }
+
+        html {
+            margin: 94.48px;
+        }
+
         html {
             direction: {{ $contract->direction }};
         }
