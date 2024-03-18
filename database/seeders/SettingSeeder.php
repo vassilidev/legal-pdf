@@ -27,5 +27,19 @@ class SettingSeeder extends Seeder
             'builder.final_component'     => '{"key":"finalPage","type":"panel","input":false,"label":"","title":"","tableView":false,"components":[{"key":"surveyUserEmail","type":"email","input":true,"label":"{{ contract.email_option_text }}","tableView":true,"applyMaskOn":"change","validate":{"required":true}}]}',
             'builder.signature_component' => '{"key":"signatureOption","type":"panel","input":false,"label":"","title":"Options","tableView":false,"components":[{"key":"content","html":"<p><strong> {{ contract.signature_option_text }} <\/strong><\/p>","type":"content","input":false,"label":"Content","tableView":false,"refreshOnChange":false},{"key":"signatureOption","type":"checkbox","input":true,"label":"' . __('contract.signature_option_checkbox') . '","tableView":false,"defaultValue":false}]}'
         ]);
+
+        setting([
+            'front.navbar' => file_get_contents(database_path('seeders/settings/navbar.blade.php')),
+            'front.footer' => file_get_contents(database_path('seeders/settings/footer.blade.php')),
+            'front.layout' => file_get_contents(database_path('seeders/settings/layout.blade.php')),
+
+            'pdf.invoice'  => file_get_contents(database_path('seeders/settings/pdfInvoice.blade.php')),
+            'pdf.contract' => file_get_contents(database_path('seeders/settings/pdfContract.blade.php')),
+
+            'mail.paymentSucceeded' => file_get_contents(database_path('seeders/settings/mailPayment.blade.php')),
+
+            'orders.payment'   => file_get_contents(database_path('seeders/settings/orderPayment.blade.php')),
+            'orders.succeeded' => file_get_contents(database_path('seeders/settings/orderSucceeded.blade.php')),
+        ]);
     }
 }
