@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Enums;
+
+use Illuminate\Support\Str;
+
 enum Currency: string
 {
     // Major currencies
@@ -53,6 +56,10 @@ enum Currency: string
     case YER = 'yer'; // Yemeni Rial
     case AFN = 'afn'; // Afghan Afghani
 
+    case ILS = 'ils'; // Shekel
+    case TND = 'tnd';
+    case THB = 'thb';
+
     public function getSymbol(): string
     {
         return match ($this) {
@@ -65,27 +72,7 @@ enum Currency: string
             self::SEK, self::BRL => 'R$',
             self::RUB => '₽',
             self::ZAR => 'R',
-
-            // African currencies
-            self::NGN => '₦',
-            self::ZMW => 'ZK',
-            self::KES => 'KSh',
-            self::GHS => '₵',
-            self::DZD => 'د.ج',
-            self::MAD => 'د.م.',
-            self::ETB => 'ብር',
-            self::XAF, self::XOF => 'Fr',
-
-            // Middle Eastern currencies
-            self::AED => 'د.إ',
-            self::SAR, self::YER, self::IRR, self::OMR, self::QAR => '﷼',
-            self::KWD => 'د.ك',
-            self::BHD => 'د.ب',
-            self::JOD => 'د.ا',
-            self::LBP => 'ل.ل',
-            self::IQD => 'ع.د',
-            self::SYP => 'ل.س',
-            self::AFN => '؋',
+            default => Str::upper($this->value),
         };
     }
 }

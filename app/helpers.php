@@ -25,11 +25,7 @@ if (!function_exists('formatCurrency')) {
 
         $formattedAmount = number_format($price / 100, 2);
 
-        if ($currency === Currency::EUR) {
-            return "{$formattedAmount}{$symbol}";
-        }
-
-        return "{$symbol}{$formattedAmount}";
+        return "{$formattedAmount} {$symbol}";
     }
 }
 
